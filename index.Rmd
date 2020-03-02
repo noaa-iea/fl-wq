@@ -1,44 +1,129 @@
 ---
-title: "Untitled"
+title: "Fisher Water Quality Monitoring"
 output: 
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include=FALSE}
-library(flexdashboard)
+# load libraries
+if (!require(librarian)) install.packages("librarian"); library(librarian)
+shelf(
+  flexdashboard,
+  fs, here, glue, digest,
+  tibble, readr, dplyr,
+  ggplot2,
+  leaflet, sf, raster,
+  marmap, mikkovihtakari/PlotSvalbard)
+select = dplyr::select
+
+dir_data <- here("data")
+
+csvs <- list.files(dir_data, ".*csv$", full.names = T)
+
+csv <- csvs[1]
+
+pts <- read_csv(csv) %>%
+  rename(
+    lon = "Longitude (°)", 
+    lat = "Latitude (°)") %>% 
+  filter(
+    !is.na(lon),
+    !is.na(lat)) %>% 
+  st_as_sf(
+    coords = c("lon", "lat"), crs = 4326, remove = F)
+
+# get bottom depth
+bb <- pts %>% 
+  st_buffer(0.8) %>% 
+  st_bbox()
+# TODO: download hi res from [Bathymetric Data Viewer](https://maps.ngdc.noaa.gov/viewers/bathymetry/)
+# try: Digital Elevation Model: Florida and East Gulf of Mexico (3 arc-second)
+
+bathy_tif <- glue("{dir_data}/bathy_{digest(bb)}.tif")
+if (!file.exists(bathy_tif)){
+  r_bathy <- getNOAA.bathy(bb$xmin, bb$xmax, bb$ymin, bb$ymax, resolution = 1) %>% 
+  as.raster()
+  writeRaster(r_bathy, bathy_tif)  
+} else {
+  r_bathy <- raster(bathy_tif)
+}
+
+d <- pts %>%
+  rename(
+    depth  = "Depth (ft)",
+    temp   = "Temperature (°C)",
+    oxygen = "Oxygen Partial Pressure (Torr)") %>% 
+  filter(
+    !is.na(depth),
+    !is.na(temp)) %>% 
+  st_drop_geometry() %>% 
+  as.data.frame()
+
+d$bdepth <- extract(r_bathy, pts %>% as("Spatial")) * -1
+if (max(d$depth) > max(d$bdepth))
+  d$bdepth <- d$bdepth + (max(d$depth) - max(d$bdepth))
 ```
 
-Column {data-width=650}
+Column {.tabset data-width=650}
 -----------------------------------------------------------------------
 
-### Chart A
+### Map, dynamic
 
 ```{r}
-library(leaflet)
-
-
-
-
-
-leaflet() %>% 
-  addProviderTiles(providers$Esri.OceanBasemap)
-
+leaflet(pts) %>% 
+  addProviderTiles(providers$Esri.OceanBasemap) %>% 
+  #addTiles() %>% 
+  addMarkers()
 ```
+
+### Map, static
+
+```{r}
+blues <- c("lightsteelblue4", "lightsteelblue3",
+           "lightsteelblue2", "lightsteelblue1")
+greys <- c(grey(0.6), grey(0.93), grey(0.99))
+
+bathy <- r_bathy %>% as.bathy()
+
+plot(bathy, image = TRUE, land = TRUE, lwd = 0.03,
+        bpal = list(c(0, max(bathy), greys),
+        c(min(bathy), 0, blues)))
+
+plot(bathy, n = 1, lwd = 0.4, add = TRUE) # coastline
+
+points(pts %>% as("Spatial"), col = "red")
+```
+
 
 Column {data-width=350}
 -----------------------------------------------------------------------
 
-### Chart B
+### Temperature
 
 ```{r}
-
+# TODO add bottom_depth to points
+contours = seq(
+  min(d$temp), max(d$temp), length.out=5)[c(-1,-5)]
+section_plot(
+  d, x = "lon", y = "depth", 
+  z = "temp", bottom = "bdepth", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+# TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
 ```
 
-### Chart C
+### Oxygen
 
 ```{r}
+contours = seq(
+  min(d$oxygen), max(d$oxygen), length.out=5)[c(-1,-5)]
 
+section_plot(
+  d, x = "lon", y = "depth", 
+  z = "oxygen", bottom = "bdepth", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
 ```
 
