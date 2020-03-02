@@ -24,7 +24,9 @@ dir_data <- here("data")
 
 csvs <- list.files(dir_data, ".*csv$", full.names = T)
 
-csv <- csvs[1]
+csv <- csvs[2]
+
+# TODO: avg lon/lat
 
 pts <- read_csv(csv) %>%
   rename(
@@ -43,10 +45,11 @@ bb <- pts %>%
 # TODO: download hi res from [Bathymetric Data Viewer](https://maps.ngdc.noaa.gov/viewers/bathymetry/)
 # try: Digital Elevation Model: Florida and East Gulf of Mexico (3 arc-second)
 
+# cache bathymetry given bounding box (using a hash)
 bathy_tif <- glue("{dir_data}/bathy_{digest(bb)}.tif")
 if (!file.exists(bathy_tif)){
   r_bathy <- getNOAA.bathy(bb$xmin, bb$xmax, bb$ymin, bb$ymax, resolution = 1) %>% 
-  as.raster()
+    as.raster()
   writeRaster(r_bathy, bathy_tif)  
 } else {
   r_bathy <- raster(bathy_tif)
@@ -54,14 +57,26 @@ if (!file.exists(bathy_tif)){
 
 d <- pts %>%
   rename(
+    dtime  = "Date Time",
     depth  = "Depth (ft)",
     temp   = "Temperature (°C)",
     oxygen = "Oxygen Partial Pressure (Torr)") %>% 
   filter(
     !is.na(depth),
     !is.na(temp)) %>% 
-  st_drop_geometry() %>% 
-  as.data.frame()
+  arrange(dtime) %>% 
+  st_drop_geometry() # %>% 
+  # as.data.frame()
+
+# select(d, dtime, depth ,depth_dif) %>% View()
+# d
+
+# filter for downcast (not up)
+row_end <- which.max(d$depth)
+d <- d[1:row_end,]
+# filter out surface entries (< 5 m), except row immediately before
+row_beg <- max(which(d$depth < 5)) - 1
+d <- d[row_beg:nrow(d),]
 
 d$bdepth <- extract(r_bathy, pts %>% as("Spatial")) * -1
 if (max(d$depth) > max(d$bdepth))
@@ -76,7 +91,6 @@ Column {.tabset data-width=650}
 ```{r}
 leaflet(pts) %>% 
   addProviderTiles(providers$Esri.OceanBasemap) %>% 
-  #addTiles() %>% 
   addMarkers()
 ```
 

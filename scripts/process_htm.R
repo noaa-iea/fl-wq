@@ -1,18 +1,17 @@
-# load libraries
+# load libraries ----
 if (!require(librarian)) install.packages("librarian"); library(librarian)
 shelf(
   fs, here, glue, 
   tibble, readr, dplyr, tidyr, purrr, stringr,
   yaml, rvest)
 
-# set variables
+# set variables ----
 dir_data <- here("data")
 
 # define functions
 process_htm <- function(htm, csv, yml, redo = F){
   
   # skip if already exists
-  #browser()
   if (all(file.exists(csv, yml)) & !redo){
     message("Files csv & yml exist, so skipping:\n  ", basename(htm))
     return()
@@ -58,11 +57,11 @@ process_htm <- function(htm, csv, yml, redo = F){
     write_yaml(yml)
 }
 
-# get files
+# get files ----
 files <- tibble(
   htm = list.files(dir_data, ".*htm$", full.names = T),
   csv = map_chr(htm, path_ext_set, "csv"),
   yml = map_chr(htm, path_ext_set, "yml"))
 
-# process files
-pwalk(files, process_htm)
+# process files ----
+pwalk(files, process_htm, redo = T)
