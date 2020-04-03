@@ -20,67 +20,23 @@ shelf(
   marmap, mikkovihtakari/PlotSvalbard)
 select = dplyr::select
 
-dir_data <- here("data")
+dir_data <- here("data/Test Data")
 
-csvs <- list.files(dir_data, ".*csv$", full.names = T)
+csvs <- list.files(dir_data, "processed.*csv$", full.names = T)
 
-csv <- csvs[2]
+csv <- csvs[1]
 
-# TODO: avg lon/lat
+d <- read_csv(csv)
 
-pts <- read_csv(csv) %>%
-  rename(
-    lon = "Longitude (°)", 
-    lat = "Latitude (°)") %>% 
-  filter(
-    !is.na(lon),
-    !is.na(lat)) %>% 
+pts <- d  %>%
+  group_by(csv, lon_dd, lat_dd) %>% 
+  summarize(n = n()) %>% 
   st_as_sf(
-    coords = c("lon", "lat"), crs = 4326, remove = F)
+    coords = c("lon_dd", "lat_dd"), crs = 4326, remove = F)
 
-# get bottom depth
-bb <- pts %>% 
-  st_buffer(0.8) %>% 
-  st_bbox()
-# TODO: download hi res from [Bathymetric Data Viewer](https://maps.ngdc.noaa.gov/viewers/bathymetry/)
-# try: Digital Elevation Model: Florida and East Gulf of Mexico (3 arc-second)
+ln <- pts %>% st_coordinates() %>% st_linestring()
 
-# cache bathymetry given bounding box (using a hash)
-bathy_tif <- glue("{dir_data}/bathy_{digest(bb)}.tif")
-if (!file.exists(bathy_tif)){
-  r_bathy <- getNOAA.bathy(bb$xmin, bb$xmax, bb$ymin, bb$ymax, resolution = 1) %>% 
-    as.raster()
-  writeRaster(r_bathy, bathy_tif)  
-} else {
-  r_bathy <- raster(bathy_tif)
-}
-
-d <- pts %>%
-  rename(
-    dtime  = "Date Time",
-    depth  = "Depth (ft)",
-    temp   = "Temperature (°C)",
-    oxygen = "Oxygen Partial Pressure (Torr)") %>% 
-  filter(
-    !is.na(depth),
-    !is.na(temp)) %>% 
-  arrange(dtime) %>% 
-  st_drop_geometry() # %>% 
-  # as.data.frame()
-
-# select(d, dtime, depth ,depth_dif) %>% View()
-# d
-
-# filter for downcast (not up)
-row_end <- which.max(d$depth)
-d <- d[1:row_end,]
-# filter out surface entries (< 5 m), except row immediately before
-row_beg <- max(which(d$depth < 5)) - 1
-d <- d[row_beg:nrow(d),]
-
-d$bdepth <- extract(r_bathy, pts %>% as("Spatial")) * -1
-if (max(d$depth) > max(d$bdepth))
-  d$bdepth <- d$bdepth + (max(d$depth) - max(d$bdepth))
+ctr <- ln %>% st_centroid() %>% st_coordinates()
 ```
 
 Column {.tabset data-width=650}
@@ -89,14 +45,16 @@ Column {.tabset data-width=650}
 ### Map, dynamic
 
 ```{r}
-leaflet(pts) %>% 
+leaflet(ln) %>% 
   addProviderTiles(providers$Esri.OceanBasemap) %>% 
-  addMarkers()
+  addPolylines() %>% 
+  addCircleMarkers(data = pts, stroke = F, radius = 5) %>% 
+  setView(ctr[1], ctr[2], zoom = 10)
 ```
 
 ### Map, static
 
-```{r}
+```{r, eval=F}
 blues <- c("lightsteelblue4", "lightsteelblue3",
            "lightsteelblue2", "lightsteelblue1")
 greys <- c(grey(0.6), grey(0.93), grey(0.99))
@@ -121,10 +79,10 @@ Column {data-width=350}
 ```{r}
 # TODO add bottom_depth to points
 contours = seq(
-  min(d$temp), max(d$temp), length.out=5)[c(-1,-5)]
+  min(d$temp_c), max(d$temp_c), length.out=5)[c(-1,-5)]
 section_plot(
-  d, x = "lon", y = "depth", 
-  z = "temp", bottom = "bdepth", sampling_indicator = "points",
+  d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
+  z = "temp_c", bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 # TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
 ```
@@ -133,11 +91,11 @@ section_plot(
 
 ```{r}
 contours = seq(
-  min(d$oxygen), max(d$oxygen), length.out=5)[c(-1,-5)]
+  min(d$oxygen_torr), max(d$oxygen_torr), length.out=5)[c(-1,-5)]
 
 section_plot(
-  d, x = "lon", y = "depth", 
-  z = "oxygen", bottom = "bdepth", sampling_indicator = "points",
+  d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
+  z = "oxygen_torr", bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 ```
 

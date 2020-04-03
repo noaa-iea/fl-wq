@@ -8,8 +8,9 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 
 ## next steps
 
-1. Avg lon/lat per csv (drop into yml), profile along multiple csv's.
-1. Download [US Coastal Relief Model - Floria and Eastern Gulf of Mexico](https://www.ngdc.noaa.gov/mgg/coastal/grddas03/grddas03.htm) for given area and just use that.
+- [x] Avg lon/lat per csv (drop into yml), profile along multiple csv's.
+- [x] Download [US Coastal Relief Model - Floria and Eastern Gulf of Mexico](https://www.ngdc.noaa.gov/mgg/coastal/grddas03/grddas03.htm) for given area and just use that.
+
 1. Enable [shiny with flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/shiny.html)
 1. Host on iea-demo.us, while exploring other long-term hosting options.
 1. Read rest of data from Google Drive (see below).
@@ -21,6 +22,8 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 
 Here is the google drive link:
 [FCWC](https://drive.google.com/drive/folders/1I9gg1DJnbPZR0NTxqAOfvrnYLRsebOGn?usp=sharing)
+
+BB local: `/Volumes/GoogleDrive/My Drive/projects/iea-auto/regions/gm/fisher-monitoring/data/FCWC`
 
 The folder labeled 'raw data' is the one you want. This is the historical data. 
 
