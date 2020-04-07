@@ -193,7 +193,6 @@ process_date <- function(dir, redo = F){
   # TODO: process depth
 }
 
-
 # get htm files ----
 htm_files <- tibble(
   htm = list.files(dir_data, ".*htm$", full.names = T, recursive = T),

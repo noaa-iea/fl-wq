@@ -52,7 +52,7 @@ leaflet(ln) %>%
   setView(ctr[1], ctr[2], zoom = 10)
 ```
 
-### Map, static
+<!-- ### Map, static -->
 
 ```{r, eval=F}
 blues <- c("lightsteelblue4", "lightsteelblue3",
@@ -82,6 +82,7 @@ contours = seq(
   min(d$temp_c), max(d$temp_c), length.out=5)[c(-1,-5)]
 section_plot(
   d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
+  ylab = "Depth (ft)", xlab = "Longitude",
   z = "temp_c", bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 # TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
@@ -90,11 +91,19 @@ section_plot(
 ### Oxygen
 
 ```{r}
+read_csv("data.csv") %>% 
+  filter(
+    variable == "Temperature",
+    sensor_model == "Aqua TROLL 600 Vented")
+
+
+
 contours = seq(
   min(d$oxygen_torr), max(d$oxygen_torr), length.out=5)[c(-1,-5)]
 
 section_plot(
-  d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
+  d %>% data.frame(), x = "lon_dd", y = "depth_ft",
+  ylab = "Depth (ft)", xlab = "Longitude",
   z = "oxygen_torr", bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 ```

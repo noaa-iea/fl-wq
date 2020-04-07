@@ -8,16 +8,53 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 
 ## next steps
 
-- [x] Avg lon/lat per csv (drop into yml), profile along multiple csv's.
-- [x] Download [US Coastal Relief Model - Floria and Eastern Gulf of Mexico](https://www.ngdc.noaa.gov/mgg/coastal/grddas03/grddas03.htm) for given area and just use that.
+1. reorganize data to go from wide to long:
 
+    - data.csv: datetime | value | variable | units | sensor_sn | sensor_model
+    - by default pull from `sensor_model == "Aqua TROLL 600 Vented"`
+
+1. which temperature? want in water "Aqua TROLL 600 Vented" vs air temp from "In-Situ Bluetooth Device"
+
+    - Instrument Properties
+      Device Model = Aqua TROLL 600 Vented
+      Device SN = 676038
+    - Instrument Properties
+      Device Model = In-Situ Bluetooth Device 
+      Device SN = 674484
+
+1. oxygen_mgL = RDO Concentration (mg/L)
 1. Enable [shiny with flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/shiny.html)
+1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
+1. Add Dropdown to select date
 1. Host on iea-demo.us, while exploring other long-term hosting options.
 1. Read rest of data from Google Drive (see below).
+1. Update color ramps (see 9-1-19_Venice.jpg): 
+  - Temp: blue-red
+  - Oxygen: 
+    decreasing white to black; 
+    <= 2 mg/L
+    red scale below
+  - Salinity:
+  - Chlorophyll: white to green
 1. Plot all tracks and allow user to select bounding box and date slider? similar to [Crosstalk](https://rstudio.github.io/crosstalk/)
-1. Update data live.
+1. Smooth CTD cast along depth difference (ie dtime)
+1. Update data live by [reading Google Drive](https://googledrive.tidyverse.org)
 1. Iterate based on user feedback.
 
+Most common device to use (smartphone vs desktop)?
+
+## done
+
+1. Avg lon/lat per csv (drop into yml), profile along multiple csv's.
+1. Download [US Coastal Relief Model - Floria and Eastern Gulf of Mexico](https://www.ngdc.noaa.gov/mgg/coastal/grddas03/grddas03.htm) for given area and just use that.
+
+
+## to explore
+
+- Interpolation scheme?
+  - [`PlotSvalbard::section_plot(interp_method = "mba")`](https://mikkovihtakari.github.io/PlotSvalbard/reference/section_plot.html)
+  - "mba" for multilevel B-spline interpolation using the [mba.surf](https://www.rdocumentation.org/packages/MBA/versions/0.0-8/topics/mba.surf) function. Appears to produce the best looking results. Recommended.
+  
 ## data
 
 Here is the google drive link:
