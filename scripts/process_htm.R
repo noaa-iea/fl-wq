@@ -17,7 +17,7 @@ shelf(
 select = dplyr::select
 
 # set variables ----
-dir_data  <- here("data/Test Data")
+dir_data  <- here("data/Raw Data")
 
 # define functions ----
 process_htm <- function(htm, csv, yml, redo = F){
@@ -70,42 +70,68 @@ process_htm <- function(htm, csv, yml, redo = F){
 
 process_csv <- function(csv, redo = F){
   # csv = "/Users/bbest/github/watermon-app/data/Test Data/2020-01-24/VuSitu_2020-01-24_15-05-14_Device Location_LiveReadings.csv"
+  # csv = "/Users/bbest/github/watermon-app/data/Raw Data - No Lon or Lat/2020-01-31/VuSitu_2020-01-31_13-13-07_Device Location_LiveReadings.csv"
+  # csv = "/Users/bbest/github/watermon-app/data/Raw Data/2020-02-04/VuSitu_2020-02-04_16-22-59_Device Location_LiveReadings.csv"
+  message(glue("process_csv csv: {csv}"))
   
-  d <- read_csv(csv) %>%
+  flds_req <- c("Date Time", "Depth (ft)", "Longitude (°)", "Latitude (°)", "Temperature (°C)", "Oxygen Partial Pressure (Torr)")
+  
+  d <- read_csv(csv)
+  flds_miss <- setdiff(flds_req, names(d))
+  if (length(flds_miss) > 0) stop(glue("\n\nMissing fields in csv: {paste(flds_miss, collapse=', ')}\nsv: {csv}\n\n"))
+  
+  d <- d %>%
     # TODO: check which temp to use based on sensor id (stripped out by process_htm)? 
     #   Warning message: Duplicated column names deduplicated: 'Temperature (°C)' => 'Temperature (°C)_1'
     rename(
-      dtime  = "Date Time",
-      depth_ft  = "Depth (ft)",
-      lon_dd = "Longitude (°)", 
-      lat_dd = "Latitude (°)",
-      temp_c   = "Temperature (°C)",
+      dtime       = "Date Time",
+      depth_ft    = "Depth (ft)",
+      lon_dd      = "Longitude (°)", 
+      lat_dd      = "Latitude (°)",
+      temp_c      = "Temperature (°C)",
       oxygen_torr = "Oxygen Partial Pressure (Torr)")
 
+  # average lon & lat, before filtering
+  lon_avg <- mean(d$lon_dd, na.rm = T)
+  lat_avg <- mean(d$lat_dd, na.rm = T)
+  
+  # order by time
+  d <- d %>% 
+    arrange(dtime)
+  
   # filter for downcast (not up)
   row_end <- which.max(d$depth_ft)
   d <- d[1:row_end,]
 
   # filter out surface entries (< 5 m), except row immediately before
-  row_beg <- max(which(d$depth_ft < 5)) - 1
-  d <- d[row_beg:nrow(d),]
+  idx_lt5ft <- which(d$depth_ft < 5)
+  if (length(idx_lt5ft) > 0){
+    row_beg <- max(idx_lt5ft) - 1
+    d <- d[row_beg:nrow(d),]
+  }
   
-  # average lon, lat
-  d <- d %>% 
-    mutate(
-      lon_dd = mean(lon_dd, na.rm = T),
-      lat_dd = mean(lat_dd, na.rm = T)) %>% 
-    # order by time
-    arrange(dtime)
-
+  # average lon & lat, after filtering
+  if (all(is.na(d$lon_dd) | is.na(d$lat_dd))){
+    d$lon_dd <- lon_avg
+    d$lat_dd <- lat_avg
+  } else {
+    d <- d %>% 
+      mutate(
+        lon_dd = mean(lon_dd, na.rm = T),
+        lat_dd = mean(lat_dd, na.rm = T))
+  }
+  
   d
 }
 
 process_bathy <- function(date_csv, redo = F){
-  # date_csv = "/Users/bbest/github/watermon-app/data/Test Data/processed_2020-01-24.csv"
-  
   # source: [US Coastal Relief Model - Floria and Eastern Gulf of Mexico](https://www.ngdc.noaa.gov/mgg/coastal/grddas03/grddas03.htm)
-  # 
+
+  # date_csv = "/Users/bbest/github/watermon-app/data/Test Data/processed_2020-01-24.csv"
+  # date_csv = "/Users/bbest/github/watermon-app/data/Raw Data/processed_2020-01-24.csv"
+  # date_csv = "/Users/bbest/github/watermon-app/data/Raw Data/2020-01-31.csv"
+  
+  message(glue("process_bathy date_csv: {date_csv}"))
   
   dir_bathy <- here("data/bathy")
   bathy_nc  <- glue("{dir_bathy}/fl_east_gom_crm_v1.nc")
@@ -148,7 +174,7 @@ process_bathy <- function(date_csv, redo = F){
   # }
   
   # extract bottom depth
-  pts$bdepth_ft <- extract(
+  pts$bdepth_ft <- raster::extract(
     r_bathy, 
     pts %>% as("Spatial")) * -1 %>% 
     set_units(m) %>% 
@@ -179,19 +205,46 @@ process_bathy <- function(date_csv, redo = F){
 
 process_date <- function(dir, redo = F){
   # dir = "/Users/bbest/github/watermon-app/data/Test Data/2020-01-24"
+  # dir = date_dirs[1]
+  # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2020-01-24"
+  # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2020-01-31"
+
+  message(glue("process_date dir: {dir}"))
   
   date_csv <- glue("{dir_data}/processed_{basename(dir)}.csv")
   
   csvs <- list.files(dir, ".*csv$", recursive = T, full.names = T)
   
   d <- map_df(setNames(csvs, basename(csvs)), process_csv, .id = "csv")
-  names(d)
+  #names(d)
   
   write_csv(d, date_csv)
   
   process_bathy(date_csv)
   # TODO: process depth
 }
+
+# unzip files ---
+zip_files <- tibble(
+  zip     = list.files(dir_data, ".*zip$", full.names = T, recursive = T),
+  dir     = dirname(zip),
+  zip_dir = map_chr(zip, path_ext_remove),
+  htm     = map_chr(zip, path_ext_set, "htm")) %>% 
+  filter(
+    !file_exists(htm),
+    !dir_exists(zip_dir))
+
+# unzip individual files ending in LiveReadings.zip
+zip_files %>% 
+  filter(!str_detect(zip, "LiveReadings.zip$")) %>% 
+  select(zipfile = zip, exdir = dir) %>% 
+  pwalk(unzip)
+
+# unzip everything else presumed a directory
+zip_files %>% 
+  filter(!str_detect(zip, "LiveReadings.zip$")) %>% 
+  select(zipfile = zip, exdir = zip_dir) %>% 
+  pwalk(unzip)
 
 # get htm files ----
 htm_files <- tibble(
@@ -207,5 +260,5 @@ date_dirs <- list.dirs(dir_data, recursive = F) %>%
     str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$")
 
 # process date directories ----
-pwalk(date_dirs, process_date, redo = T)
+walk(date_dirs, process_date, redo = T)
 
