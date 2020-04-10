@@ -27,6 +27,11 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
 1. Add Dropdown to select date
 1. Host on iea-demo.us, while exploring other long-term hosting options.
+1. Operationalize processing of data:
+    - setup cron to run every 5 min to check for new data in googledrive, fetch and process
+    - Use [googledrive](https://googledrive.tidyverse.org/) with a service account token (see [drive_auth() • googledrive](https://googledrive.tidyverse.org/reference/drive_auth.html))
+    - When encountering any errors, send email with error log to user list using [blastula](https://github.com/rich-iannone/blastula) for html-formatted emails; or even possibility of sending text messages via email through mobile phone provider: "Thanks for the data, but we're missing lon/lat. Can you help us tracking down these locations?"
+    - Alternatively, the user could submit an email with attachment, then this cron job script processes the email attachments, adds to google drive, runs QA/QC and processes the file, a la robolimpet thermal sensor fetch of email (https://marinebon.org/thermal-data).
 1. Read rest of data from Google Drive (see below).
 1. Update color ramps (see 9-1-19_Venice.jpg): 
   - Temp: blue-red
@@ -42,6 +47,10 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 1. Iterate based on user feedback.
 
 Most common device to use (smartphone vs desktop)?
+
+## protocol
+
+See [VuSitu Operating Instruction.docx]()
 
 ## done
 
@@ -81,3 +90,11 @@ Joe Bishop, the engineer working on this project and has setup the field units h
 
 1. Which SN for Temperature?
 1. Where to maintain long-term? Want on NOAA site. Where to host Shiny server?
+
+
+## rmarkdown awesomeness
+
+- [What is R Markdown? on Vimeo](https://vimeo.com/178485416)
+- https://rstudio.com/resources/cheatsheets/
+- [RStudio Webinars](https://resources.rstudio.com/webinars)
+    - [The Essentials of Data Science](https://resources.rstudio.com/the-essentials-of-data-science)

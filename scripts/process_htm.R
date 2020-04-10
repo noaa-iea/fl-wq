@@ -13,7 +13,8 @@ shelf(
   fs, here, glue, units,
   tibble, readr, dplyr, tidyr, purrr, stringr,
   yaml, rvest,
-  sf, raster)
+  sf, raster,
+  googledrive)
 select = dplyr::select
 
 # set variables ----
@@ -78,7 +79,10 @@ process_csv <- function(csv, redo = F){
   
   d <- read_csv(csv)
   flds_miss <- setdiff(flds_req, names(d))
-  if (length(flds_miss) > 0) stop(glue("\n\nMissing fields in csv: {paste(flds_miss, collapse=', ')}\nsv: {csv}\n\n"))
+  if (length(flds_miss) > 0){
+    warning(glue("\n\nMissing fields in csv: {paste(flds_miss, collapse=', ')}\ncsv: {csv}\n\n"))
+    # TODO: log errors 
+  }
   
   d <- d %>%
     # TODO: check which temp to use based on sensor id (stripped out by process_htm)? 
@@ -223,6 +227,9 @@ process_date <- function(dir, redo = F){
   process_bathy(date_csv)
   # TODO: process depth
 }
+
+# check for new data on googledrive
+drive_find(n_max = 30)
 
 # unzip files ---
 zip_files <- tibble(
