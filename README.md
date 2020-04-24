@@ -27,6 +27,7 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
 1. Add Dropdown to select date
 1. Host on iea-demo.us, while exploring other long-term hosting options.
+1. Allow user login.
 1. Operationalize processing of data:
     - setup cron to run every 5 min to check for new data in googledrive, fetch and process
     - Use [googledrive](https://googledrive.tidyverse.org/) with a service account token (see [drive_auth() • googledrive](https://googledrive.tidyverse.org/reference/drive_auth.html))
@@ -45,6 +46,7 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 1. Smooth CTD cast along depth difference (ie dtime)
 1. Update data live by [reading Google Drive](https://googledrive.tidyverse.org)
 1. Iterate based on user feedback.
+1. theme: [nik01010/dashboardthemes: BETA: custom theme support for R Shinydashboard applications.](https://github.com/nik01010/dashboardthemes)
 
 Most common device to use (smartphone vs desktop)?
 

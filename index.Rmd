@@ -21,69 +21,80 @@ shelf(
   marmap, mikkovihtakari/PlotSvalbard)
 select = dplyr::select
 
-dir_data <- here("data/Raw Data")
+dir_processed_csvs <- here("data/Raw Data")
 
-#get_data <- reactive()
+processed_csvs <- tibble(
+  path = list.files(dir_processed_csvs, "processed.*csv$", full.names = T),
+  date = str_replace(path, ".*/processed_(.*)\\.csv", "\\1"))
 
 # get dates ----
-date_dirs <- list.dirs(here("data/Raw Data"), recursive = F) %>% 
-    str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$")
-
-csvs <- list.files(dir_data, "processed.*csv$", full.names = T)
-
-csv <- csvs[1]
-
-d <- read_csv(csv)
-
-pts <- d  %>%
-  group_by(csv, lon_dd, lat_dd) %>% 
-  summarize(n = n()) %>% 
-  st_as_sf(
-    coords = c("lon_dd", "lat_dd"), crs = 4326, remove = F)
-
-ln <- pts %>% st_coordinates() %>% st_linestring()
-
-ctr <- ln %>% st_centroid() %>% st_coordinates()
+# date_dirs <- list.dirs(dir_data, recursive = F) %>% 
+#     str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$")
 ```
 
 Column {.tabset data-width=650}
 -----------------------------------------------------------------------
 
 ```{r}
-dates_vec <- setNames(date_dirs, basename(date_dirs))
-
 selectInput(
-  "sel_date", "Date", dates_vec)
+  "sel_date", "Date", processed_csvs$date)
 ```
+
+```{r}
+get_transect <- reactive({
+#get_transect <- function(input = list(sel_date = processed_csvs$date[2])){
+  # by date selected
+  
+  d  <- processed_csvs %>% 
+    filter(date == input$sel_date) %>% 
+    pull(path) %>% 
+    read_csv()
+
+  pts <- d  %>%
+    group_by(csv, lon_dd, lat_dd) %>% 
+    summarize(n = n()) %>% 
+    st_as_sf(
+      coords = c("lon_dd", "lat_dd"), crs = 4326, remove = F) %>% 
+    ungroup()
+  
+  if (nrow(pts) > 1){
+    ln  <- pts %>% st_coordinates() %>% st_linestring()
+    ctr <- ln %>% st_centroid() %>% st_coordinates()
+  } else {
+    ln  <- NULL
+    ctr <- pts %>% select(lon_dd, lat_dd) %>% st_drop_geometry() %>% as.numeric()
+  }
+
+  list(
+    d   = d,
+    pts = pts,
+    ln  = ln,
+    ctr = ctr)
+})
+#}
+```
+
 
 ### Map
 
 ```{r}
-leaflet(ln) %>% 
-  addProviderTiles(providers$Esri.OceanBasemap) %>% 
-  addPolylines() %>% 
-  addCircleMarkers(data = pts, stroke = F, radius = 5) %>% 
-  setView(ctr[1], ctr[2], zoom = 10)
+output$map = renderLeaflet({
+  o <- get_transect()
+  
+  map <- leaflet() %>% 
+    addProviderTiles(providers$Esri.OceanBasemap) %>% 
+    addMarkers(data = o$pts, popup = ~glue("{lon_dd}, {lat_dd}"))
+  if (!is.null(o$ln)){
+    map <- map %>% 
+      addPolylines(data = o$ln)
+  }
+  map %>% 
+    addCircleMarkers(data = o$pts, stroke = F, radius = 5) %>% 
+    setView(o$ctr[1], o$ctr[2], zoom = 10)
+})
+
+leafletOutput('map')
 ```
-
-<!-- ### Map, static -->
-
-```{r, eval=F}
-blues <- c("lightsteelblue4", "lightsteelblue3",
-           "lightsteelblue2", "lightsteelblue1")
-greys <- c(grey(0.6), grey(0.93), grey(0.99))
-
-bathy <- r_bathy %>% as.bathy()
-
-plot(bathy, image = TRUE, land = TRUE, lwd = 0.03,
-        bpal = list(c(0, max(bathy), greys),
-        c(min(bathy), 0, blues)))
-
-plot(bathy, n = 1, lwd = 0.4, add = TRUE) # coastline
-
-points(pts %>% as("Spatial"), col = "red")
-```
-
 
 Column {data-width=350}
 -----------------------------------------------------------------------
@@ -91,31 +102,54 @@ Column {data-width=350}
 ### Temperature
 
 ```{r}
-# TODO add bottom_depth to points
-contours = seq(
-  min(d$temp_c), max(d$temp_c), length.out=5)[c(-1,-5)]
-section_plot(
-  d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
-  ylab = "Depth (ft)", xlab = "Longitude",
-  z = "temp_c", bottom = "bdepth_ft", sampling_indicator = "points",
-  interpolate  = T, contour = contours, contour_color = "gray")
-# TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
+output$plot_temp <- renderPlot({
+  d <- get_transect()$d
+  
+  # TODO add bottom_depth to points
+  contours = seq(
+    min(d$temp_c), max(d$temp_c), length.out=5)[c(-1,-5)]
+  
+  section_plot(
+    d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
+    ylab = "Depth (ft)", xlab = "Longitude",
+    z = "temp_c", bottom = "bdepth_ft", sampling_indicator = "points",
+    interpolate  = T, contour = contours, contour_color = "gray")
+  # TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
+  
+})
+
+plotOutput("plot_temp") # TODO: brush = brushOpts(id = "plot1_brush")) # brush between plots
 ```
 
 ### Oxygen
 
-```{r}
-# read_csv("data.csv") %>% 
-#   filter(
-#     variable == "Temperature",
-#     sensor_model == "Aqua TROLL 600 Vented")
-contours = seq(
-  min(d$oxygen_torr), max(d$oxygen_torr), length.out=5)[c(-1,-5)]
+```{r, eval=T}
+output$plot_o2 <- renderPlot({
+  o <- get_transect()
+  d <- o$d
+  
+  # read_csv("data.csv") %>% 
+  #   filter(
+  #     variable == "Temperature",
+  #     sensor_model == "Aqua TROLL 600 Vented")
+  contours = seq(
+    min(d$oxygen_torr), max(d$oxygen_torr), length.out=5)[c(-1,-5)]
+  
+  
+  if (is.null(o$ln)){
+    # TODO: fix plot for when no transect line, only single CTD cast
+    d <- bind_rows(
+      d,
+      d %>% 
+        mutate(lon_dd = lon_dd + 0.0001))}
+  
+  section_plot(
+    d %>% data.frame(), x = "lon_dd", y = "depth_ft",
+    ylab = "Depth (ft)", xlab = "Longitude",
+    z = "oxygen_torr", bottom = "bdepth_ft", sampling_indicator = "points",
+    interpolate  = T, contour = contours, contour_color = "gray")
+})
 
-section_plot(
-  d %>% data.frame(), x = "lon_dd", y = "depth_ft",
-  ylab = "Depth (ft)", xlab = "Longitude",
-  z = "oxygen_torr", bottom = "bdepth_ft", sampling_indicator = "points",
-  interpolate  = T, contour = contours, contour_color = "gray")
+plotOutput("plot_o2")
 ```
 
