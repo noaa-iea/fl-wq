@@ -1,0 +1,198 @@
+---
+title: "Fisher Water Quality Monitoring"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+editor_options:
+  chunk_output_type: console
+params:
+  dates:
+    - "2020-01-24"
+    - "2020-02-04"
+  date_selected: "2020-02-04"
+---
+
+```{r setup, include=FALSE}
+# load libraries
+if (!require(librarian)) install.packages("librarian"); library(librarian)
+shelf(
+  flexdashboard, shiny, htmltools,
+  fs, here, glue, digest,
+  tibble, readr, dplyr, stringr, purrr,
+  knitr,
+  ggplot2,
+  leaflet, sf, raster,
+  marmap, mikkovihtakari/PlotSvalbard)
+select = dplyr::select
+
+dir_processed_csvs <- here("data/Raw Data")
+
+processed_csvs <- tibble(
+  path = list.files(dir_processed_csvs, "processed.*csv$", full.names = T),
+  date = str_replace(path, ".*/processed_(.*)\\.csv", "\\1"))
+
+# get dates ----
+# date_dirs <- list.dirs(dir_data, recursive = F) %>% 
+#     str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+```
+
+Column {.tabset data-width=650}
+-----------------------------------------------------------------------
+
+```{r}
+shiny::selectInput(
+  "select_date", "Select date:", 
+  choices = c("2020-01-24", "2020-02-04"),
+  selectize = F)
+```
+
+
+```{r}
+# params <- list(
+#   dates         = c("2020-01-24", "2020-02-04"),
+#   date_selected = "2020-02-04")
+
+tag_option_date2url <- function(date){
+  
+  fname <- knitr::current_input() %>% 
+    basename() %>% 
+    path_ext_set("html")
+  
+  #fname <- "index"
+  # date = "2020-02-04"; fname = "index"
+  
+  date_index <- max(params$dates)
+  
+  date_url     <- ifelse(
+    date == date_index, 
+    './index.html', 
+    glue("./date_{date}.html"))
+  is_selected <- ifelse(fname == pfx_url, T, F)
+  
+  tag(
+    "option", 
+    list(
+      value    = date_url,
+      selected = is_selected)) %>% 
+    tagAppendChild(date)
+}
+
+tag(
+  "select", 
+  list(
+    id = "sel_date", name = "", 
+    onchange = "javascript:location.href = this.value;")) %>% 
+  tagAppendChildren(
+    map(params$dates, tag_option_date2url))
+```
+
+```{r}
+#get_transect <- reactive({
+get_transect <- function(){
+#get_transect <- function(input = list(sel_date = processed_csvs$date[2])){
+  # by date selected
+  
+  d  <- processed_csvs %>% 
+    filter(date == as.Date(params$date_selected)) %>% 
+    pull(path) %>% 
+    read_csv()
+
+  pts <- d  %>%
+    group_by(csv, lon_dd, lat_dd) %>% 
+    summarize(n = n()) %>% 
+    st_as_sf(
+      coords = c("lon_dd", "lat_dd"), crs = 4326, remove = F) %>% 
+    ungroup()
+  
+  if (nrow(pts) > 1){
+    ln  <- pts %>% st_coordinates() %>% st_linestring()
+    ctr <- ln %>% st_centroid() %>% st_coordinates()
+  } else {
+    ln  <- NULL
+    ctr <- pts %>% select(lon_dd, lat_dd) %>% st_drop_geometry() %>% as.numeric()
+  }
+
+  list(
+    d   = d,
+    pts = pts,
+    ln  = ln,
+    ctr = ctr)
+}
+#})
+#}
+```
+
+
+### Map
+
+```{r}
+o <- get_transect()
+  
+map <- leaflet() %>% 
+  addProviderTiles(providers$Esri.OceanBasemap) %>% 
+  addMarkers(data = o$pts, popup = ~glue("{lon_dd}, {lat_dd}"))
+if (!is.null(o$ln)){
+  map <- map %>% 
+    addPolylines(data = o$ln)
+}
+map %>% 
+  addCircleMarkers(data = o$pts, stroke = F, radius = 5) %>% 
+  setView(o$ctr[1], o$ctr[2], zoom = 10)
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Temperature
+
+```{r}
+d <- o$d
+
+
+# TODO add bottom_depth to points
+contours = seq(
+  min(d$temp_c), max(d$temp_c), length.out=5)[c(-1,-5)]
+
+if (is.null(o$ln)){
+  # TODO: fix plot for when no transect line, only single CTD cast
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+
+section_plot(
+  d %>% data.frame(), x = "lon_dd", y = "depth_ft", 
+  ylab = "Depth (ft)", xlab = "Longitude",
+  z = "temp_c", bottom = "bdepth_ft", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+# TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
+```
+
+### Oxygen
+
+```{r, eval=T}
+d <- o$d
+  
+# read_csv("data.csv") %>% 
+#   filter(
+#     variable == "Temperature",
+#     sensor_model == "Aqua TROLL 600 Vented")
+contours = seq(
+  min(d$oxygen_torr), max(d$oxygen_torr), length.out=5)[c(-1,-5)]
+
+
+if (is.null(o$ln)){
+  # TODO: fix plot for when no transect line, only single CTD cast
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+
+section_plot(
+  d %>% data.frame(), x = "lon_dd", y = "depth_ft",
+  ylab = "Depth (ft)", xlab = "Longitude",
+  z = "oxygen_torr", bottom = "bdepth_ft", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+```
+

@@ -103,11 +103,20 @@ Column {data-width=350}
 
 ```{r}
 output$plot_temp <- renderPlot({
-  d <- get_transect()$d
+  o <- get_transect()
+  d <- o$d
+
   
   # TODO add bottom_depth to points
   contours = seq(
     min(d$temp_c), max(d$temp_c), length.out=5)[c(-1,-5)]
+  
+  if (is.null(o$ln)){
+    # TODO: fix plot for when no transect line, only single CTD cast
+    d <- bind_rows(
+      d,
+      d %>% 
+        mutate(lon_dd = lon_dd + 0.0001))}
   
   section_plot(
     d %>% data.frame(), x = "lon_dd", y = "depth_ft", 

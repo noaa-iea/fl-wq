@@ -23,11 +23,14 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
       Device SN = 674484
 
 1. oxygen_mgL = RDO Concentration (mg/L)
-1. Enable [shiny with flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/shiny.html)
+1. Go with Rmarkdown to Github Pages a la ship-cards.
+  - vs Enable [shiny with flexdashboard](https://rmarkdown.rstudio.com/flexdashboard/shiny.html)
 1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
+1. Drop the dots in the profile plot.
+1. Jitter the locations by 1/4-degree with thick line. Apply to all markers at once so shifted, but shape remains.
 1. Add Dropdown to select date
 1. Host on iea-demo.us, while exploring other long-term hosting options.
-1. Allow user login.
+1. (Allow user login for upload.)
 1. Operationalize processing of data:
     - setup cron to run every 5 min to check for new data in googledrive, fetch and process
     - Use [googledrive](https://googledrive.tidyverse.org/) with a service account token (see [drive_auth() • googledrive](https://googledrive.tidyverse.org/reference/drive_auth.html))
