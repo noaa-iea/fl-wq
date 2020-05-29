@@ -50,17 +50,20 @@ shiny::selectInput(
 
 
 ```{r}
-# params <- list(
-#   dates         = c("2020-01-24", "2020-02-04"),
-#   date_selected = "2020-02-04")
 tag_option_date2url <- function(date){
   
-  fname <- knitr::current_input() %>% 
-    basename() %>% 
-    path_ext_set("html")
   
-  #fname <- "index"
-  # date = "2020-02-04"; fname = "index"
+  # out_html <- knitr::current_input() %>% 
+  #   basename() %>% 
+  #   path_ext_set("html")
+  
+  # params <- list(
+  #   dates         = c("2020-01-24", "2020-02-04"),
+  #   date_selected = "2020-01-24")
+  #   #date_selected = "2020-02-04")
+  # #fname <- "index"
+  # date = "2020-02-04"
+  #date = "2020-01-24"
   
   date_index <- max(params$dates)
   
@@ -68,7 +71,14 @@ tag_option_date2url <- function(date){
     date == date_index, 
     './index.html', 
     glue("./date_{date}.html"))
-  is_selected <- ifelse(date == params$date_selected, T, F)
+  #is_selected <- ifelse(out_html == basename(date_url), T, F)
+  
+  message(glue("date: {date}; params$date_selected: {params$date_selected}"))
+  
+  #option_args = list(value = date_url)
+  is_selected <- NULL
+  if(date == params$date_selected)
+    is_selected <- NA
   
   tag(
     "option", 
