@@ -40,7 +40,8 @@ processed_csvs <- tibble(
 Column {.tabset data-width=650}
 -----------------------------------------------------------------------
 
-```{r}
+```{r, eval=F}
+# TODO: stylize <select></select> below like prettier Shiny version
 shiny::selectInput(
   "select_date", "Select date:", 
   choices = c("2020-01-24", "2020-02-04"),
@@ -52,7 +53,6 @@ shiny::selectInput(
 # params <- list(
 #   dates         = c("2020-01-24", "2020-02-04"),
 #   date_selected = "2020-02-04")
-
 tag_option_date2url <- function(date){
   
   fname <- knitr::current_input() %>% 
@@ -64,11 +64,11 @@ tag_option_date2url <- function(date){
   
   date_index <- max(params$dates)
   
-  date_url     <- ifelse(
+  date_url <- ifelse(
     date == date_index, 
     './index.html', 
     glue("./date_{date}.html"))
-  is_selected <- ifelse(fname == pfx_url, T, F)
+  is_selected <- ifelse(date == params$date_selected, T, F)
   
   tag(
     "option", 
