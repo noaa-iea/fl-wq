@@ -4,6 +4,8 @@ output:
   flexdashboard::flex_dashboard:
     orientation: columns
     vertical_layout: fill
+    self_contained: FALSE
+    lib_dir: docs/site_libs
 editor_options:
   chunk_output_type: console
 params:
@@ -14,6 +16,10 @@ params:
 ---
 
 ```{r setup, include=FALSE}
+# params = list(
+#   date          = c("2020-01-24", "2020-02-04"),
+#   date_selected = "2020-01-24")
+
 # load libraries
 if (!require(librarian)) install.packages("librarian"); library(librarian)
 shelf(
@@ -51,7 +57,6 @@ shiny::selectInput(
 
 ```{r}
 tag_option_date2url <- function(date){
-  
   
   # out_html <- knitr::current_input() %>% 
   #   basename() %>% 
@@ -98,7 +103,6 @@ tag(
 ```
 
 ```{r}
-#get_transect <- reactive({
 get_transect <- function(){
 #get_transect <- function(input = list(sel_date = processed_csvs$date[2])){
   # by date selected
@@ -111,9 +115,9 @@ get_transect <- function(){
   pts <- d  %>%
     group_by(csv, lon_dd, lat_dd) %>% 
     summarize(n = n()) %>% 
+    ungroup() %>% 
     st_as_sf(
-      coords = c("lon_dd", "lat_dd"), crs = 4326, remove = F) %>% 
-    ungroup()
+      coords = c("lon_dd", "lat_dd"), crs = 4326, remove = F)
   
   if (nrow(pts) > 1){
     ln  <- pts %>% st_coordinates() %>% st_linestring()
@@ -129,8 +133,6 @@ get_transect <- function(){
     ln  = ln,
     ctr = ctr)
 }
-#})
-#}
 ```
 
 
