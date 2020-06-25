@@ -8,20 +8,34 @@
 # 
 
 # load libraries ----
-if (!require(librarian)) install.packages("librarian"); library(librarian)
+if (!require(librarian)){
+  # https://github.com/DesiQuintans/librarian/issues/21
+  if (!require(remotes))
+    install.packages("remotes")
+  remotes::install_github("DesiQuintans/librarian")
+  library(librarian)
+}
+
 shelf(
   fs, here, glue, units,
   tibble, readr, dplyr, tidyr, purrr, stringr,
   yaml, rvest,
   sf, raster,
   googledrive)
-select = dplyr::select
+select  = dplyr::select
+extract = tidyr::extract
 
 # set variables ----
-dir_data  <- here("data/Raw Data")
+dir_data    <- here("data/Raw Data")
+# FCWC/Raw Data/ - Google Drive
+dir_gdrive <- "https://drive.google.com/drive/u/1/folders/1X3IvU-n8jBEpWPEaf13_DZXnokBBlwmM"
 
 # define functions ----
 process_htm <- function(htm, csv, yml, redo = F){
+  # htm <- htm_files$htm[1]; csv <- htm_files$csv[1]; yml <- htm_files$yml[1]
+
+  # htm <- "/Users/bbest/github/watermon-app/data/Raw Data/2020-02-04/VuSitu_2020-02-04_16-22-59_Device Location_LiveReadings.htm"
+  # csv <- path_ext_set(htm, "csv"); yml <- path_ext_set(htm, "yml")
   
   # skip if already exists
   if (all(file.exists(csv, yml)) & !redo){
@@ -41,12 +55,44 @@ process_htm <- function(htm, csv, yml, redo = F){
   d <- D[(row_h):nrow(D),]
   write_csv(d, csv, col_names = F, na = "", quote_escape = "none")
   d <- read_csv(csv)
-  # update column namesremove extraneous serial numbers from headers
-  names(d) <- names(d) %>% 
-    str_replace(" \\([0-9]+\\)", "")
-  write_csv(d, csv)
-            
-  # save metadata
+  
+  d <- d %>%
+    rename(dtime = `Date Time`) %>% 
+    pivot_longer(
+      -dtime, 
+      names_to = "metric_units_sn", 
+      values_to = "value", values_drop_na = T)
+    
+  #View(d)
+  d_metrics <- d %>% 
+    group_by(metric_units_sn) %>% 
+    summarize() %>% 
+    ungroup() %>% 
+    extract(
+      metric_units_sn, 
+      regex  = "(.+) \\((.+)\\) \\((.+)\\)", 
+      into   = c("metric", "units", "sn"),
+      remove = F)
+  d_metrics <- bind_rows(
+    d_metrics %>% 
+      filter(!is.na(metric)),
+    d_metrics %>% 
+      filter(is.na(metric)) %>% 
+      select(metric_units_sn) %>% 
+      extract(
+        metric_units_sn, 
+        regex  = "(.+) \\((.+)\\)", 
+        into   = c("metric", "units"),
+        remove = F)) %>% 
+    mutate(
+      sn = as.integer(sn))
+  
+  d <- d %>% 
+    left_join(
+      d_metrics, by = "metric_units_sn") %>%
+    select(-metric_units_sn)
+
+  # metadata
   m <- tibble(
     txt = D[1:(row_h-1),1]) %>% 
     filter(str_detect(txt, "")) %>% 
@@ -58,15 +104,44 @@ process_htm <- function(htm, csv, yml, redo = F){
       val       = ifelse(is_keyval, str_split(keyval, " = ", simplify=T)[,2], NA),
       dat       = map2(key, val, function(k,v) setNames(list(v), k))) %>% 
     fill(grp) %>% 
-    filter(!is.na(keyval)) %>% 
-    select(grp, dat) %>% 
-    group_by(grp) %>% 
-    nest() 
-  m_l <- m %>% as.list()
-  map2(m_l$grp, m_l$data, function(g, d){
-    setNames(list(unlist(d[['dat']]) %>% as.list()), g)
-    }) %>% 
-    write_yaml(yml)
+    filter(!is.na(keyval))
+
+  m_instruments <- m %>% 
+    filter(grp == "Instrument Properties") %>% 
+    mutate(
+      is_model       = key == "Device Model",
+      instrument_num = cumsum(is_model)) %>% 
+    select(instrument_num, key, val) %>% 
+    pivot_wider(
+      names_from  = key,
+      values_from = val) %>% 
+    mutate(
+      sn = as.integer(`Device SN`))
+  
+  metrics_keep <- c(
+    "Depth", "Latitude", "Longitude",
+    "Chlorophyll-a Concentration", "RDO Concentration", "Salinity", "Temperature")
+
+  # d_0 <- d
+  d <-  bind_rows(
+    # metrics except Temperature
+    d %>% 
+      filter(
+        metric %in% setdiff(metrics_keep, "Temperature")),
+    # metric Temperature
+    d %>% 
+      left_join(
+        m_instruments, by = "sn") %>% 
+      filter(
+        metric == "Temperature" & `Device Model` == "Aqua TROLL 600 Vented")) %>% 
+    # cleanup
+    select(-instrument_num, -`Device SN`) %>% 
+    rename(
+      device_sn    = sn,
+      device_model = `Device Model`) %>% 
+    arrange(metric, dtime)
+
+  write_csv(d, csv)
 }
 
 process_csv <- function(csv, redo = F){
@@ -228,30 +303,55 @@ process_date <- function(dir, redo = F){
   # TODO: process depth
 }
 
-# check for new data on googledrive
-drive_find(n_max = 30)
+list.files(dir_data, ".*zip$", recursive = F)
 
-# unzip files ---
-zip_files <- tibble(
+# get local zips
+zips_l <- tibble(
   zip     = list.files(dir_data, ".*zip$", full.names = T, recursive = T),
+  base    = basename(zip),
   dir     = dirname(zip),
   zip_dir = map_chr(zip, path_ext_remove),
-  htm     = map_chr(zip, path_ext_set, "htm")) %>% 
-  filter(
-    !file_exists(htm),
-    !dir_exists(zip_dir))
+  htm     = map_chr(zip, path_ext_set, "htm"))
+#View(zips_l)
 
-# unzip individual files ending in LiveReadings.zip
-zip_files %>% 
-  filter(!str_detect(zip, "LiveReadings.zip$")) %>% 
-  select(zipfile = zip, exdir = dir) %>% 
-  pwalk(unzip)
+# TODO: authenticate to googledrive automatically with token
 
-# unzip everything else presumed a directory
-zip_files %>% 
-  filter(!str_detect(zip, "LiveReadings.zip$")) %>% 
-  select(zipfile = zip, exdir = zip_dir) %>% 
-  pwalk(unzip)
+# check for new data on googledrive
+zips_g <- drive_ls(dir_gdrive, pattern = "\\.zip$", recursive = T) %>% 
+  filter(!name %in% zips_l$base)
+message(glue("Downloading {nrow(zips_g)} zips from 'FCWC/Raw Data/' Google Drive."))
+# zips_g_0 <- zips_g; zips_g <- zips_g_0
+zips_g <- zips_g %>%
+  arrange(name) %>% 
+  mutate(
+    path_zip = path(dir_data, name),
+    # download zip
+    dl   = map2(
+      id, path_zip, 
+      function(x, y) 
+        drive_download((x), y, verbose = F)),
+    # get date directory
+    dir_date = map_chr(
+      path_zip,
+      function(x)
+        path(dir_data, str_replace(x, ".*([0-9]{4}-[0-9]{2}-[0-9]{2}).*$", "\\1"))),
+    # unzip into date directory
+    unzip = map2(
+      path_zip, dir_date,
+      function(x, y)
+        unzip(x, exdir = y)))
+
+# # unzip individual files ending in LiveReadings.zip
+# zip_files %>% 
+#   filter(!str_detect(zip, "LiveReadings.zip$")) %>% 
+#   select(zipfile = zip, exdir = dir) %>% 
+#   pwalk(unzip)
+# 
+# # unzip everything else presumed a directory
+# zip_files %>% 
+#   filter(!str_detect(zip, "LiveReadings.zip$")) %>% 
+#   select(zipfile = zip, exdir = zip_dir) %>% 
+#   pwalk(unzip)
 
 # get htm files ----
 htm_files <- tibble(

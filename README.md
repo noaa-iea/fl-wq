@@ -97,6 +97,11 @@ Joe Bishop, the engineer working on this project and has setup the field units h
 1. Where to maintain long-term? Want on NOAA site. Where to host Shiny server?
 
 
+## resources
+
+* [Red Tide Current Status | FWC](https://myfwc.com/research/redtide/statewide/)
+  * [Red Tide Current Status](http://myfwc.maps.arcgis.com/apps/View/index.html?appid=87162eec3eb846218cec711d16462a72)
+
 ## rmarkdown awesomeness
 
 - [What is R Markdown? on Vimeo](https://vimeo.com/178485416)
