@@ -30,6 +30,17 @@ dir_data    <- here("data/Raw Data")
 # FCWC/Raw Data/ - Google Drive
 dir_gdrive <- "https://drive.google.com/drive/u/1/folders/1X3IvU-n8jBEpWPEaf13_DZXnokBBlwmM"
 
+metrics <- tribble(
+  ~short        , ~long,
+  "dtime"       , "Date Time",
+  "depth_ft"    , "Depth", 
+  "lat_dd"      , "Latitude",
+  "lon_dd"      , "Longitude",
+  "chl_mgL"     , "Chlorophyll-a Concentration",
+  "o2_mgL"      , "RDO Concentration",
+  "salinity_psu", "Salinity",
+  "temp_c"      , "Temperature")
+
 # define functions ----
 process_htm <- function(htm, csv, yml, redo = F){
   # htm <- htm_files$htm[1]; csv <- htm_files$csv[1]; yml <- htm_files$yml[1]
@@ -37,11 +48,17 @@ process_htm <- function(htm, csv, yml, redo = F){
   # htm <- "/Users/bbest/github/watermon-app/data/Raw Data/2020-02-04/VuSitu_2020-02-04_16-22-59_Device Location_LiveReadings.htm"
   # csv <- path_ext_set(htm, "csv"); yml <- path_ext_set(htm, "yml")
   
+  # htm <- "/Users/bbest/github/watermon-app/data/Raw Data/2019-12-17/VuSitu_2019-12-17_07-54-54_Device Location_LiveReadings.htm"
+  # csv <- path_ext_set(htm, "csv"); yml <- path_ext_set(htm, "yml")
+  
   # skip if already exists
   if (all(file.exists(csv, yml)) & !redo){
     message("Files csv & yml exist, so skipping:\n  ", basename(htm))
-    return()
+    return(T)
   }
+  
+  #message(glue("htm:{htm}\n  csv:{csv}\n  yml:{yml}"))
+  message(glue("htm:{htm}"))
   
   # read table from html
   D <- read_html(htm) %>% 
@@ -52,16 +69,34 @@ process_htm <- function(htm, csv, yml, redo = F){
   row_h <- which(D[,1] == "Date Time")
   
   # extract data
-  d <- D[(row_h):nrow(D),]
-  write_csv(d, csv, col_names = F, na = "", quote_escape = "none")
-  d <- read_csv(csv)
+  d       <- D[(row_h):nrow(D),]
+  raw_csv <- tempfile(fileext = "csv")
+  write_csv(d, raw_csv, col_names = F, na = "", quote_escape = "none")
+  d       <- read_csv(raw_csv)
+  unlink(raw_csv)
+  
+  # get columns which aren't numeric, 
+  #   eg Marked in VuSitu_2019-12-17_07-54-54_Device Location_LiveReadings.htm
+  cols_notnumeric <- tibble(
+    col      = names(d),
+    col_type = map_chr(d, function(x) class(x)[1])) %>% 
+    filter(col_type != "numeric") %>% 
+    filter(col      != "Date Time") %>% 
+    pull(col)
+  
+  #if (length(cols_notnumeric) > 0 )
+  message(glue("  cols_notnumeric: {paste(cols_notnumeric, collapse = ',')}"))
   
   d <- d %>%
     rename(dtime = `Date Time`) %>% 
+    select(!any_of(cols_notnumeric)) %>% 
     pivot_longer(
       -dtime, 
       names_to = "metric_units_sn", 
       values_to = "value", values_drop_na = T)
+  # View(d)
+  # htm <- "/Users/bbest/github/watermon-app/data/Raw Data/2019-12-17/VuSitu_2019-12-17_07-54-54_Device Location_LiveReadings.htm"
+  # Error: Can't combine `Actual Conductivity (µS/cm) (673392)` <double> and `Marked` <character>.
     
   #View(d)
   d_metrics <- d %>% 
@@ -117,11 +152,9 @@ process_htm <- function(htm, csv, yml, redo = F){
       values_from = val) %>% 
     mutate(
       sn = as.integer(`Device SN`))
-  
-  metrics_keep <- c(
-    "Depth", "Latitude", "Longitude",
-    "Chlorophyll-a Concentration", "RDO Concentration", "Salinity", "Temperature")
 
+  metrics_keep <- metrics$long
+  
   # d_0 <- d
   d <-  bind_rows(
     # metrics except Temperature
@@ -142,33 +175,44 @@ process_htm <- function(htm, csv, yml, redo = F){
     arrange(metric, dtime)
 
   write_csv(d, csv)
+  T
 }
 
 process_csv <- function(csv, redo = F){
   # csv = "/Users/bbest/github/watermon-app/data/Test Data/2020-01-24/VuSitu_2020-01-24_15-05-14_Device Location_LiveReadings.csv"
   # csv = "/Users/bbest/github/watermon-app/data/Raw Data - No Lon or Lat/2020-01-31/VuSitu_2020-01-31_13-13-07_Device Location_LiveReadings.csv"
   # csv = "/Users/bbest/github/watermon-app/data/Raw Data/2020-02-04/VuSitu_2020-02-04_16-22-59_Device Location_LiveReadings.csv"
+  # csv <- csvs[1]
+  
   message(glue("process_csv csv: {csv}"))
   
-  flds_req <- c("Date Time", "Depth (ft)", "Longitude (°)", "Latitude (°)", "Temperature (°C)", "Oxygen Partial Pressure (Torr)")
+  #flds_req <- c("Date Time", "Depth (ft)", "Longitude (°)", "Latitude (°)", "Temperature (°C)", "Oxygen Partial Pressure (Torr)")
   
   d <- read_csv(csv)
-  flds_miss <- setdiff(flds_req, names(d))
-  if (length(flds_miss) > 0){
-    warning(glue("\n\nMissing fields in csv: {paste(flds_miss, collapse=', ')}\ncsv: {csv}\n\n"))
-    # TODO: log errors 
-  }
+  # flds_miss <- setdiff(flds_req, names(d))
+  # if (length(flds_miss) > 0){
+  #   warning(glue("\n\nMissing fields in csv: {paste(flds_miss, collapse=', ')}\ncsv: {csv}\n\n"))
+  #   # TODO: log errors 
+  # }
+  # TODO: check for flds_miss, but now in column metric
+  
+  metric2col <- tribble(
+    ~col, ~metric,
+    "dtime"      , "Date Time",
+    "depth_ft"   , "Depth (ft)",
+    "lon_dd"     , "Longitude (°)", 
+    "lat_dd"     , "Latitude (°)",
+    "temp_c"     , "Temperature (°C)",
+    "oxygen_torr", "Oxygen Partial Pressure (Torr)")
   
   d <- d %>%
-    # TODO: check which temp to use based on sensor id (stripped out by process_htm)? 
-    #   Warning message: Duplicated column names deduplicated: 'Temperature (°C)' => 'Temperature (°C)_1'
-    rename(
-      dtime       = "Date Time",
-      depth_ft    = "Depth (ft)",
-      lon_dd      = "Longitude (°)", 
-      lat_dd      = "Latitude (°)",
-      temp_c      = "Temperature (°C)",
-      oxygen_torr = "Oxygen Partial Pressure (Torr)")
+    left_join(
+      metrics, by = c("metric" = "long")) %>% 
+    pivot_wider(
+      id_cols     = dtime,
+      names_from  = short,
+      values_from = value)
+    # Warning message: Duplicated column names deduplicated: 'Temperature (°C)' => 'Temperature (°C)_1'
 
   # average lon & lat, before filtering
   lon_avg <- mean(d$lon_dd, na.rm = T)
@@ -287,10 +331,14 @@ process_date <- function(dir, redo = F){
   # dir = date_dirs[1]
   # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2020-01-24"
   # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2020-01-31"
-
+  # dir <- date_dirs[1]
+  # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2019-08-23"
+  
   message(glue("process_date dir: {dir}"))
   
   date_csv <- glue("{dir_data}/processed_{basename(dir)}.csv")
+  
+  if (file.exists(date_csv) & redo = F) return()
   
   csvs <- list.files(dir, ".*csv$", recursive = T, full.names = T)
   
@@ -303,9 +351,7 @@ process_date <- function(dir, redo = F){
   # TODO: process depth
 }
 
-list.files(dir_data, ".*zip$", recursive = F)
-
-# get local zips
+# get local zips ----
 zips_l <- tibble(
   zip     = list.files(dir_data, ".*zip$", full.names = T, recursive = T),
   base    = basename(zip),
@@ -316,7 +362,7 @@ zips_l <- tibble(
 
 # TODO: authenticate to googledrive automatically with token
 
-# check for new data on googledrive
+# check for new data on googledrive ----
 zips_g <- drive_ls(dir_gdrive, pattern = "\\.zip$", recursive = T) %>% 
   filter(!name %in% zips_l$base)
 message(glue("Downloading {nrow(zips_g)} zips from 'FCWC/Raw Data/' Google Drive."))
@@ -363,9 +409,13 @@ htm_files <- tibble(
 pwalk(htm_files, process_htm, redo = T)
 
 # get dates ----
-date_dirs <- list.dirs(dir_data, recursive = F) %>% 
-    str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$")
+get_date_dirs <- function(dir_data){
+  tibble(
+    dir  = list.dirs(dir_data, recursive = F) %>% 
+      str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$"),
+    date = str_replace(dir, ".*/([0-9]{4}-[0-9]{2}-[0-9]{2})$", "\\1") %>% as.Date())
+}
+date_dirs <- get_date_dirs(dir_data)$dir
 
 # process date directories ----
-walk(date_dirs, process_date, redo = T)
-
+walk(date_dirs$dir, process_date, redo = T)

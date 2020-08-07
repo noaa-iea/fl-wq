@@ -2,8 +2,12 @@
 if (!require(librarian)) install.packages("librarian"); library(librarian)
 shelf(rmarkdown, purrr, glue, here, fs)
 
-# for example
-dates = c("2020-01-24", "2020-02-04")
+#source("scripts/process_htm.R")
+dir_data    <- here("data/Raw Data")
+date_dirs <- get_date_dirs(dir_data)
+
+# dates = c("2020-01-24", "2020-02-04") # example
+dates = get_date_dirs(dir_data)$date
 
 make_date <- function(date){
   # date = "2020-02-04" # "2020-01-24"

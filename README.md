@@ -57,6 +57,8 @@ Most common device to use (smartphone vs desktop)?
 
 See [VuSitu Operating Instruction.docx]()
 
+- [Aqua TROLL 600 Multiparameter Sonde - In-Situ](https://in-situ.com/us/aqua-troll-600-multiparameter-sonde)
+
 ## done
 
 1. Avg lon/lat per csv (drop into yml), profile along multiple csv's.

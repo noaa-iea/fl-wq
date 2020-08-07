@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="ProgId" content="Excel.Sheet"/>
+<meta name="isi-csv-file-name" content="VuSitu_2019-12-17_09-28-50_Device Location_LiveReadings.csv"/>
+<meta name="isi-report-id" content="f69ca41b-4172-4c40-a6a1-28aefd23064a"/>
+<meta name="isi-report-version" content="1"/>
+<meta name="isi-report-type" content="LiveReadings"/>
+<meta name="isi-report-created" content="2019-12-17T14:25:42.9638280-05:00"/>
+<meta name="format-detection" content="telephone=no">
+<style type="text/css">
+<!--
+body {
+font-family: "Roboto", Arial, Helvetica, Geneva, sans-serif;
+margin: 0px;
+}
+#header {
+border-bottom: 5px solid #002378;
+margin-bottom: 10px;
+padding-right: 10px;
+display: flex;
+flex-wrap: wrap;
+}
+#logo {
+background-image: url("data:image/svg+xml;base64,PHN2ZyB2ZXJzaW9uPSIxLjEiIGJhc2VQcm9maWxlPSJiYXNpYyIgaWQ9IkxheWVyXzEiDQoJIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTUxLjkgMTAyLjMiDQoJIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPHN0eWxlIHR5cGU9InRleHQvY3NzIj4NCgkuc3Qwe2ZpbGw6I0ZCQjczNTt9DQoJLnN0MXtmaWxsOiMyOTM2ODE7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik02OS4zLDQxLjljMC45LTUuMSwxLjgtMTEuNCwxLjYtMTUuN2MtMC40LTguNi00LjQtOS44LTkuMi05LjhjLTQuOCwwLTcuOSwwLjctMTEuOCw0LjQNCgkJYy0yLjYsMi40LTMuNSw1LjctMy41LDUuN3MtNC4zLTAuNi03LjctMC4yYy00LjIsMC40LTguOSwzLjEtMTEsNi4yYy0yLjUsMy43LTAuOSw4LjcsNywxMi42YzYuMywzLjEsMTYuNyw0LjMsMjQuMSw0LjcNCgkJQzU5LjgsNDUuNCw2NC40LDQyLDY5LjMsNDEuOSIvPg0KCTxwYXRoIGNsYXNzPSJzdDAiIGQ9Ik0xMDYuNCwyNi40Yy0zLjMtMC40LTcuMywwLjEtNy4zLDAuMXMwLjMtMy4zLTEuMy01LjdjLTIuNC0zLjctNS4zLTQuNC0xMC4xLTQuNGMtNC45LDAtOS40LDEuMi0xMy4xLDkuOA0KCQljLTEuOSw0LjMtMy41LDEwLjYtNC42LDE1LjdjNC41LDAuNCw3LjQsMy43LDYuNyw3LjljNy41LTAuNCwxNy42LTEuMiwyNS4zLTQuNGM5LjUtMy45LDEyLjYtNywxMi40LTExLjUNCgkJQzExNC40LDMwLjcsMTEwLjUsMjYuOCwxMDYuNCwyNi40Ii8+DQoJPHBhdGggY2xhc3M9InN0MCIgZD0iTTY2LjEsNTguMmMtNC43LDAtNy45LTMuMi03LjUtNy4zYy03LjUsMC40LTE3LjUsMS4xLTI1LjYsNGMtOS43LDMuNS0xMy4xLDYuOC0xMi41LDEyLjYNCgkJYzAuNCwzLjIsNC42LDYuNCw4LjcsNi45YzMuMywwLjQsNy44LTAuMiw3LjgtMC4ycy0wLjMsMy4zLDEuMyw1LjdjMi40LDMuNyw1LjMsNC40LDEwLjEsNC40YzQuOSwwLDkuMy0xLjIsMTMuMS05LjgNCgkJQzYzLjMsNzAsNjUsNjMuNCw2Ni4xLDU4LjIiLz4NCgk8cGF0aCBjbGFzcz0ic3QwIiBkPSJNMTAwLjksNTUuMWMtNi43LTIuOC0xNy0zLjgtMjQuNC00LjJjLTEuMiwzLjktNS4yLDctOS42LDcuM0M2Niw2My4zLDY1LDcwLDY1LjIsNzQuNA0KCQljMC40LDguNiw0LjQsOS44LDkuMiw5LjhjNC42LDAsNy45LTAuNywxMS44LTQuNGMyLjUtMi40LDMuNS01LjcsMy41LTUuN3M0LjMsMC42LDcuNywwLjJjNC4yLTAuNCwxMC4yLTMuMSwxMS42LTYuNQ0KCQlDMTExLjEsNjMuMSwxMDguOCw1OC40LDEwMC45LDU1LjEiLz4NCjwvZz4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMjY5LjksNTQuMSAzMDIuMSw1NC4xIDI5Ni44LDcxLjEgMjY0LjYsNzEuMSAJIi8+DQoJPHBhdGggY2xhc3M9InN0MSIgZD0iTTMzMy44LDYzLjhjLTAuNSwxLjctMC42LDMuMi0wLjMsNC40YzAuOCw0LDYuNSw0LjgsMTEuNyw0LjhjNC41LDAsMTEuOC0xLjEsMTMuMy02YzEtMy41LTIuNi00LjQtMTctNy42DQoJCWMtMTMuMy0zLTI4LjYtNS45LTI0LjUtMTkuMmM0LjctMTUuMywyNC40LTIxLjksNDIuOC0yMS45YzE5LjQsMCwzNSw1LjUsMzAuOCwyMS43aC0yNi4xYzEuMy0yLjUsMC4zLTQuMi0xLjYtNS4zDQoJCWMtMS45LTEuMi00LjktMS43LTcuNi0xLjdjLTMuOCwwLTEwLjEsMC43LTExLjMsNC41Yy0xLDQuNywxMS41LDUuNywyMy40LDguNGMxMS45LDIuNiwyMy4xLDcsMTkuNCwxOS4xDQoJCWMtNS4zLDE3LjMtMjguNSwyMi45LTQ4LjQsMjIuOWMtMTAuMiwwLTM4LjMtMi43LTMyLjEtMjMuOUgzMzMuOHoiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNDI3LjUsMzIuMmgtMjQuOGw0LjEtMTMuNWgyNC44TDQyNy41LDMyLjJ6IE00MDAuOCwzNy45aDI0LjhsLTE0LjgsNDguMkgzODZMNDAwLjgsMzcuOXoiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNDY1LDM3LjlINDc3bC0zLjUsMTEuM2gtMTIuMUw0NTYuMyw2NmMtMS40LDQuNS0wLjYsNi40LDUuNyw2LjRjMS45LDAsMy44LTAuMSw1LjctMC4zbC00LjMsMTMuOQ0KCQljLTUsMC0xMC44LDAuNi0xNi4xLDAuNmMtMTAuNSwwLTIxLjgtMS4yLTE3LjgtMTQuNGw3LjEtMjMuMWgtOC45bDMuNS0xMS4zaDguOWw0LjUtMTQuN2gyNC44TDQ2NSwzNy45eiIvPg0KCTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik01MzcuMiw4Ni4xaC0yNGwxLjktNi4xaC0wLjJjLTYuMSw0LjgtMTMuNSw3LjMtMjMuNSw3LjNjLTExLjcsMC0yMC43LTUuMy0xNy4zLTE2LjNsMTAuMS0zMy4xSDUwOWwtNy43LDI1LjMNCgkJYy0xLjcsNS42LTIsOS41LDUuMiw5LjVjNC4zLDAsMTAuNC0xLjYsMTIuOC05LjNsNy44LTI1LjVoMjQuOEw1MzcuMiw4Ni4xeiIvPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDEiIHBvaW50cz0iMTY5LjMsMTkuOCAxOTYuOSwxOS44IDE3Ni42LDg2LjEgMTQ5LDg2LjEgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xOTkuNywzNy45aDI0bC0xLjksNi4xaDAuM2M2LjEtNC44LDEzLjUtNy4zLDIzLjUtNy4zYzExLjcsMCwyMC43LDUuMywxNy4zLDE2LjNsLTEwLjEsMzMuMWgtMjQuOGw3LjctMjUuMw0KCQljMS43LTUuNiwyLTkuNS01LjMtOS41Yy00LjMsMC0xMC40LDEuNi0xMi44LDkuM2wtNy44LDI1LjVoLTI0LjhMMTk5LjcsMzcuOXoiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNzIuMSw1MC4xQzcxLjYsNTIuMiw2OS4zLDU0LDY3LDU0Yy0yLjQsMC00LTEuNy0zLjYtMy45YzAuNC0yLjIsMi43LTMuOSw1LjEtMy45DQoJCUM3MC45LDQ2LjIsNzIuNSw0Ny45LDcyLjEsNTAuMSIvPg0KCTxwYXRoIGNsYXNzPSJzdDEiIGQ9Ik0xMjMuOSwyMS40YzAuOS0xLjksMC40LTQuNy0xLjEtNi4yQzEwNC4yLTQuNSw2MS45LTUuMSwzMC42LDEzLjZjLTcuNCw0LjQtMTMuMyw5LjktMTguMSwxNS42DQoJCWM0LjEtNC40LDkuNC04LjQsMTUuNC0xMkM1NSwxLDkxLjMsMS4yLDEwOS44LDIxLjFjMCwwLDMsMy4zLDYuMSw0QzExOS43LDI1LjksMTIyLjMsMjQuNSwxMjMuOSwyMS40Ii8+DQoJPHBhdGggY2xhc3M9InN0MSIgZD0iTTEyLjUsMzMuM2MtMi41LDAuNi00LjYsMi4yLTUuOCw0Yy0xNi4xLDI1LjItMiw1My45LDMwLjcsNjIuN2M3LjcsMi4xLDE2LjEsMi41LDI0LjQsMg0KCQljLTYuNiwwLjEtMTMtMC44LTE5LjMtMi41QzE0LjEsOTEuOSwzLjgsNjQuOSwyMCw0MC43YzAsMCwxLjEtMS44LDAuNS0zLjlDMTkuNywzMy44LDE2LjcsMzIuMywxMi41LDMzLjMiLz4NCgk8cGF0aCBjbGFzcz0ic3QxIiBkPSJNNjcuMSwxMDAuOWMxLjYsMS4zLDMuNywxLjcsNi43LDEuM2MzNC43LTUuNSw2Mi44LTMzLjYsNjEuNS02MS4yYy0wLjMtNi41LTIuOC0xMi40LTYuMi0xNy42DQoJCWMyLjQsNC4zLDMuNiw5LjIsMy45LDE0LjVjMS4xLDIzLjktMjUuMyw0Ny41LTYwLjIsNTIuOWwwLDBjLTEuNiwwLjItMy4yLDAuOC00LjYsMS44QzY1LDk1LDY0LjQsOTguNyw2Ny4xLDEwMC45Ii8+DQoJPHBhdGggY2xhc3M9InN0MSIgZD0iTTEzMy41LDk2LjVjLTEsMS4xLTIuMywxLjYtMy44LDEuNmMtMS41LDAtMi44LTAuNS0zLjgtMS42Yy0xLTEuMS0xLjYtMi4zLTEuNi0zLjhjMC0xLjUsMC41LTIuNywxLjYtMy44DQoJCWMxLTEsMi4zLTEuNiwzLjgtMS42YzEuNSwwLDIuOCwwLjUsMy44LDEuNmMxLjEsMSwxLjYsMi4zLDEuNiwzLjhDMTM1LjEsOTQuMiwxMzQuNSw5NS40LDEzMy41LDk2LjUgTTEyNi40LDg5LjQNCgkJYy0wLjksMC45LTEuMywyLTEuMywzLjNjMCwxLjMsMC40LDIuNCwxLjMsMy4zYzAuOSwwLjksMiwxLjQsMy4zLDEuNGMxLjMsMCwyLjQtMC41LDMuMy0xLjRjMC45LTAuOSwxLjMtMiwxLjMtMy4zDQoJCWMwLTEuMy0wLjQtMi40LTEuMy0zLjNjLTAuOS0wLjktMi0xLjQtMy4zLTEuNEMxMjguNCw4OC4xLDEyNy4zLDg4LjUsMTI2LjQsODkuNCBNMTI5LjYsODkuN2MwLjcsMCwxLjMsMC4xLDEuNiwwLjINCgkJYzAuNiwwLjMsMC45LDAuOCwwLjksMS41YzAsMC41LTAuMiwwLjktMC42LDEuMmMtMC4yLDAuMS0wLjUsMC4yLTAuOSwwLjNjMC41LDAuMSwwLjgsMC4zLDEsMC42YzAuMiwwLjMsMC4zLDAuNiwwLjMsMC45djAuNA0KCQljMCwwLjEsMCwwLjMsMCwwLjRjMCwwLjIsMCwwLjMsMC4xLDAuM2wwLDAuMWgtMWMwLDAsMCwwLDAtMC4xYzAsMCwwLDAsMC0wLjFsMC0wLjJ2LTAuNWMwLTAuNy0wLjItMS4xLTAuNS0xLjMNCgkJYy0wLjItMC4xLTAuNi0wLjItMS4yLTAuMmgtMC44djIuM2gtMXYtNS45SDEyOS42eiBNMTMwLjcsOTAuNmMtMC4zLTAuMS0wLjctMC4yLTEuMy0wLjJoLTAuOXYyLjFoMC45YzAuNCwwLDAuOCwwLDEtMC4xDQoJCWMwLjQtMC4yLDAuNi0wLjUsMC42LTAuOUMxMzEuMSw5MS4xLDEzMSw5MC44LDEzMC43LDkwLjYiLz4NCjwvZz4NCjwvc3ZnPg==");
+background-size: 130px; 
+background-repeat: no-repeat;
+background-position: 10px;
+width: 140px;
+height: 40px;
+margin: auto 10px auto 0;
+}
+#message {
+margin: auto auto auto 10px;
+display: flex;
+}
+#excelMessage {
+font-size: 12px;
+font-weight: bold;
+margin: auto 0 auto 0;
+}
+.minor {
+font-style: italic;
+color: #777;
+font-size: 10px;
+margin: auto 0 auto 5px;
+font-weight: normal;
+}
+.minor a {
+color: #777;
+}
+#devLink {
+font-size: 9px;
+margin: 15px 0 15px auto;
+}
+table {
+margin-left: 15px;
+mso-displayed-decimal-separator:"\.";
+mso-displayed-thousand-separator:"\,";
+}
+td {
+border:none;
+white-space:nowrap;
+font-size: 13px;
+height: 14px;
+padding-right: 15px;
+}
+table tr.sectionMember td {
+max-width: 0px;
+}
+table tr.sectionHeader td {
+font-weight:bold;
+max-width: 0px;
+}
+table tr.dataHeader td {
+font-weight:bold;
+}
+td.dateTime {
+mso-number-format:"m\/d\/yy\\ h\:mm\:ss\.000";
+}
+.data, .date, data-marked {
+text-align: left;
+white-space: nowrap;
+}
+.data-marked {
+background: #FFF98B;
+}
+dl {
+overflow: hidden;
+}
+dt {
+float: left;
+}
+dd {
+float: left;
+}
+#processing {
+margin: auto 5px;
+width: 20px;
+height: 20px;
+visibility: hidden;
+}
+#processing.spinning {
+visibility: visible
+}
+.spinner {
+position: relative;
+left: 0px;
+}
+@keyframes spinner {
+to {transform: rotate(360deg);}
+}
+.spinner:before {
+content: '';
+background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9InNwaW5uZXIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOiMwMDI3OEM7fTwvc3R5bGU+PGcgaWQ9InNuYWtlcyI+PGc+PHBhdGggY2xhc3M9InN0MCIgZD0iTTI5My45LDU0LjhjNzAuMywyOC43LDczLjMsNzcsMTAwLjYsMTE1LjVjMTMuMiwxOC42LDM4LDI1LjgsNjEuOCwxMy45YzIwLjctMTAuMywyNC44LTM5LjIsMTQuOS02MS44QzQ2OC45LDExNy41LDQwMy40LDAsMjU1LDFDMTEzLjYsMiw0OS44LDEwNC42LDQzLjgsMTE1LjVDMzcuNywxMjYuNywxNDEuNS03LjQsMjkzLjksNTQuOHogTTIxOCw0NTdjLTcwLjMtMjguNy03My4zLTc3LTEwMC42LTExNS41Yy0xMy4yLTE4LjYtMzgtMjUuOC02MS44LTEzLjljLTIwLjcsMTAuMy0yNC44LDM5LjItMTQuOSw2MS44YzIuMiw1LjEsNjcuNywxMjIuNiwyMTYuMiwxMjEuNWMxNDEuNC0xLDIwNS4yLTEwMy42LDIxMS4yLTExNC42QzQ3NC4yLDM4NS4xLDM3MC4zLDUxOS4yLDIxOCw0NTd6Ii8+PC9nPjwvZz48L3N2Zz4=');
+background-repeat: no-repeat;
+background-size: 100%;
+box-sizing: border-box;
+position: absolute;
+width: 20px;
+height: 20px;
+animation: spinner 1.2s linear infinite;
+}
+@media screen {
+    .body-loading:before {
+        content: ' ';
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9InNwaW5uZXIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgNTEyIDUxMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNTEyIDUxMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsLXJ1bGU6ZXZlbm9kZDtjbGlwLXJ1bGU6ZXZlbm9kZDtmaWxsOiMwMDI3OEM7fTwvc3R5bGU+PGcgaWQ9InNuYWtlcyI+PGc+PHBhdGggY2xhc3M9InN0MCIgZD0iTTI5My45LDU0LjhjNzAuMywyOC43LDczLjMsNzcsMTAwLjYsMTE1LjVjMTMuMiwxOC42LDM4LDI1LjgsNjEuOCwxMy45YzIwLjctMTAuMywyNC44LTM5LjIsMTQuOS02MS44QzQ2OC45LDExNy41LDQwMy40LDAsMjU1LDFDMTEzLjYsMiw0OS44LDEwNC42LDQzLjgsMTE1LjVDMzcuNywxMjYuNywxNDEuNS03LjQsMjkzLjksNTQuOHogTTIxOCw0NTdjLTcwLjMtMjguNy03My4zLTc3LTEwMC42LTExNS41Yy0xMy4yLTE4LjYtMzgtMjUuOC02MS44LTEzLjljLTIwLjcsMTAuMy0yNC44LDM5LjItMTQuOSw2MS44YzIuMiw1LjEsNjcuNywxMjIuNiwyMTYuMiwxMjEuNWMxNDEuNC0xLDIwNS4yLTEwMy42LDIxMS4yLTExNC42QzQ3NC4yLDM4NS4xLDM3MC4zLDUxOS4yLDIxOCw0NTd6Ii8+PC9nPjwvZz48L3N2Zz4=');
+        background-repeat: no-repeat;
+        background-size: 100%;
+        box-sizing: border-box;
+        position: fixed;
+        left: 0;
+        right:0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        animation: spinner 1.2s linear infinite;
+    }
+    .body-loading table {
+        opacity: 0.5;
+    }
+}
+-->
+</style>
+<noscript>
+<style type="text/css">
+<!--
+@media screen {
+    .body-loading:before {
+        content: ' ';
+        background-image: '';
+        background-size: 0;
+		width: 0px;
+        height: 0px;
+    }
+    .body-loading table {
+        opacity: 1;
+	}
+}
+-->
+</style>
+</noscript>
+<script type="text/javascript">
+<!--//<![CDATA[
+        window.addEventListener("load", function() {
+            if (false) return;
+
+            document.body.innerHTML = '<div id="header">\
+        <a id="logo" href="https://in-situ.com" target="_blank"></a>\
+        <div id="message">\
+            <span id="excelMessage">This file can be opened directly in Microsoft Excel\
+                <span class="minor">(or you can <a href="#" onclick="exportButton();">Export a CSV</a>)</span>\
+            </span>\
+            <span id="processing">\
+                <i class="spinner"></i>\
+            </span>\
+        </div>\
+        <div id="devLink"><a href="http://in-situ.com/developer" target="_blank">How can I auto-import these files?</a></div>\
+        </div>' + document.body.innerHTML;
+            document.body.classList.remove('body-loading');
+        });
+    function exportButton() {
+        document.getElementById('processing').classList.add('spinning');
+        window.setTimeout(function() {
+            var csvData = ToCSV();
+            // console.log(csvData);
+            var blob = new Blob([csvData], {type: 'text/csv'});
+            var a = window.document.createElement('a');
+            a.href = window.URL.createObjectURL(blob);
+            var filename = getFileName();
+            a.download = filename.substr(0, filename.length - 3) +'csv';
+            document.getElementById('processing').classList.remove('spinning');
+            // Append anchor to body.
+            document.body.appendChild(a);
+            a.click();
+            // Remove anchor from body
+            document.body.removeChild(a);
+        }, 10);
+    };
+
+    function getFileName() {
+        var metaTags = document.getElementsByTagName("META");
+        for (var metaTagIndex=0; metaTagIndex < metaTags.length; metaTagIndex++) {
+            var metaTag = document.getElementsByTagName("META")[metaTagIndex];
+            var attribute = metaTag.getAttribute("name");
+            if (attribute === "isi-csv-file-name") {
+                return metaTag.getAttribute("content");
+            }
+        }
+        return "report.htm";
+    }
+
+    function ToCSV() {
+        var newLine = "\r\n";
+        var quote ="\"";
+        var csv = "";
+        var delimiter = ",";
+        var dataTable = document.getElementById("isi-report");
+        var rows = dataTable.rows;
+        for (var rowIndex=0; rowIndex < rows.length; rowIndex++) {
+            var row = rows[rowIndex];
+            var cells = row.cells;
+            for (var cellIndex=0; cellIndex < cells.length; cellIndex ++) {
+                var cell = cells[cellIndex];
+                if (cell.previousElementSibling != null)
+                    csv += delimiter;
+
+                csv += quote + sanitize(cell.innerText) + quote;
+            }
+            csv += newLine
+        }
+        return csv;
+    }
+
+    // NOTE: CSV quote escaping and whitespace cleanup
+    function sanitize(strValue) {
+        return strValue
+            .replace(/"/g, "\"\"")
+            .replace(/\n/g, " ")
+            .replace(/\r/g, " ")
+            .replace(/\t/g, " ")
+            .trim();
+    }
+//]]>-->
+</script>
+</head>
+<body class="body-loading" dir="ltr">
+<table id="isi-report"><tr class="sectionHeader"><td isi-group="LocationProperties">Location Properties</td></tr>
+<tr class="sectionMember"><td isi-group-member="LocationProperties" isi-property="Name" isi-text-node=""><span isi-label="">Location Name</span> = <span isi-value="">Device Location</span></td></tr>
+<tr><td></td></tr>
+<tr class="sectionHeader"><td isi-group="ReportProperties">Report Properties</td></tr>
+<tr class="sectionMember"><td isi-group-member="ReportProperties" isi-property="StartTime" isi-timestamp="103323594260480"><span isi-label="">Start Time</span> = <span isi-value="">2019-12-17 09:28:50</span></td></tr>
+<tr class="sectionMember"><td isi-group-member="ReportProperties" isi-property="TimeOffset" isi-timespan-milliseconds="-18000000"><span isi-label="">Time Offset</span> = <span isi-value="">-05:00:00</span></td></tr>
+<tr class="sectionMember"><td isi-group-member="ReportProperties" isi-property="Duration" isi-timespan-milliseconds="244000"><span isi-label="">Duration</span> = <span isi-value="">00:04:04</span></td></tr>
+<tr class="sectionMember"><td isi-group-member="ReportProperties" isi-property="Readings" isi-text-node=""><span isi-label="">Readings</span> = <span isi-value="">123</span></td></tr>
+<tr><td></td></tr>
+<tr class="sectionHeader"><td isi-group="InstrumentProperties-676038">Instrument Properties</td></tr>
+<tr class="sectionMember"><td isi-group-member="InstrumentProperties-676038" isi-property="Model" isi-device-type="26"><span isi-label="">Device Model</span> = <span isi-value="">Aqua TROLL 600 Vented</span></td></tr>
+<tr class="sectionMember"><td isi-group-member="InstrumentProperties-676038" isi-property="SerialNumber" isi-text-node=""><span isi-label="">Device SN</span> = <span isi-value="">676038</span></td></tr>
+<tr><td></td></tr>
+<tr class="sectionHeader"><td isi-group="InstrumentProperties-674484">Instrument Properties</td></tr>
+<tr class="sectionMember"><td isi-group-member="InstrumentProperties-674484" isi-property="Model" isi-device-type="32771"><span isi-label="">Device Model</span> = <span isi-value="">In-Situ Bluetooth Device</span></td></tr>
+<tr class="sectionMember"><td isi-group-member="InstrumentProperties-674484" isi-property="SerialNumber" isi-text-node=""><span isi-label="">Device SN</span> = <span isi-value="">674484</span></td></tr>
+<tr><td></td></tr>
+<tr><td></td></tr>
+<tr class="dataHeader" isi-data-table="">
+<td isi-data-column-header="DateTime">Date Time</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="673392" isi-sensor-type="56" isi-parameter-type="9" isi-unit-type="65">Actual Conductivity (µS/cm) (673392)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="673392" isi-sensor-type="56" isi-parameter-type="10" isi-unit-type="65">Specific Conductivity (µS/cm) (673392)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="673392" isi-sensor-type="56" isi-parameter-type="12" isi-unit-type="97">Salinity (PSU) (673392)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="673392" isi-sensor-type="56" isi-parameter-type="13" isi-unit-type="114">Total Dissolved Solids (ppt) (673392)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="673392" isi-sensor-type="56" isi-parameter-type="11" isi-unit-type="81">Resistivity (Ω⋅cm) (673392)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="673392" isi-sensor-type="56" isi-parameter-type="14" isi-unit-type="129">Density (g/cm³) (673392)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="671693" isi-sensor-type="62" isi-parameter-type="51" isi-unit-type="257">Chlorophyll-a Fluorescence (RFU) (671693)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="671693" isi-sensor-type="62" isi-parameter-type="50" isi-unit-type="118">Chlorophyll-a Concentration (µg/L) (671693)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="672340" isi-sensor-type="57" isi-parameter-type="20" isi-unit-type="117">RDO Concentration (mg/L) (672340)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="672340" isi-sensor-type="57" isi-parameter-type="21" isi-unit-type="177">RDO Saturation (%Sat) (672340)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="672340" isi-sensor-type="57" isi-parameter-type="30" isi-unit-type="26">Oxygen Partial Pressure (Torr) (672340)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="676038" isi-sensor-type="79" isi-parameter-type="1" isi-unit-type="1">Temperature (°C) (676038)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="676038" isi-sensor-type="59" isi-parameter-type="16" isi-unit-type="22">Barometric Pressure (mm Hg) (676038)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="671053" isi-sensor-type="53" isi-parameter-type="2" isi-unit-type="17">Pressure (psi) (671053)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="671053" isi-sensor-type="53" isi-parameter-type="3" isi-unit-type="38">Depth (ft) (671053)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="676038" isi-sensor-type="79" isi-parameter-type="32" isi-unit-type="163">External Voltage (V) (676038)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="676038" isi-sensor-serial-number="676038" isi-sensor-type="79" isi-parameter-type="33" isi-unit-type="241">Battery Capacity (%) (676038)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="674484" isi-sensor-serial-number="674484" isi-sensor-type="13" isi-parameter-type="16" isi-unit-type="21">Barometric Pressure (mbar) (674484)</td>
+<td isi-data-column-header="Parameter" isi-device-serial-number="674484" isi-sensor-serial-number="674484" isi-sensor-type="13" isi-parameter-type="1" isi-unit-type="1">Temperature (°C) (674484)</td>
+<td isi-data-column-header="Parameter" isi-parameter-type="6" isi-unit-type="49" isi-external-parameter="">Latitude (°)</td>
+<td isi-data-column-header="Parameter" isi-parameter-type="7" isi-unit-type="49" isi-external-parameter="">Longitude (°)</td>
+<td isi-data-column-header="Marked">Marked</td>
+</tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323594260480"><td class="dateTime">2019-12-17 09:28:50</td><td>45096.78</td><td>49548.48</td><td>32.88031</td><td>32.20651</td><td>21.23324</td><td>1.022742</td><td>0.006578714</td><td>0.06578714</td><td>6.866173</td><td>95.33597</td><td>148.3033</td><td>22.28957</td><td>762.837</td><td>0.5822776</td><td>1.939629</td><td>0.018</td><td>81</td><td>1017.954</td><td>27.63148</td><td>26.5918533333333</td><td>-82.3756383333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323594391552"><td class="dateTime">2019-12-17 09:28:52</td><td>47610.07</td><td>51070.39</td><td>33.95369</td><td>33.19576</td><td>20.67225</td><td>1.023231</td><td>0.006671306</td><td>0.06671306</td><td>6.839992</td><td>95.34094</td><td>148.3106</td><td>22.28701</td><td>762.8342</td><td>0.5785393</td><td>1.929768</td><td>0.018</td><td>81</td><td>1017.951</td><td>27.63032</td><td>26.5918616666667</td><td>-82.375645</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323594522624"><td class="dateTime">2019-12-17 09:28:54</td><td>47968.56</td><td>50525.98</td><td>33.56902</td><td>32.84188</td><td>20.87546</td><td>1.023078</td><td>0.00628988</td><td>0.06289881</td><td>6.852554</td><td>95.38613</td><td>148.376</td><td>22.28209</td><td>762.8063</td><td>0.7015905</td><td>2.216687</td><td>0.018</td><td>81</td><td>1017.978</td><td>27.62996</td><td>26.59187</td><td>-82.37565</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323594653696"><td class="dateTime">2019-12-17 09:28:56</td><td>47931.34</td><td>50560.45</td><td>33.58551</td><td>32.8565</td><td>20.86914</td><td>1.023072</td><td>0.006458977</td><td>0.07595273</td><td>6.860986</td><td>95.49491</td><td>148.5443</td><td>22.27752</td><td>762.7861</td><td>0.5433035</td><td>1.863904</td><td>0.018</td><td>81</td><td>1017.945</td><td>27.62153</td><td>26.59187</td><td>-82.37565</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323594784768"><td class="dateTime">2019-12-17 09:28:58</td><td>47998.67</td><td>50635.82</td><td>33.64951</td><td>32.9124</td><td>20.8346</td><td>1.023119</td><td>0.005449977</td><td>0.0557938</td><td>6.859542</td><td>95.50786</td><td>148.562</td><td>22.2744</td><td>762.7766</td><td>0.4307147</td><td>1.595813</td><td>0.018</td><td>81</td><td>1017.924</td><td>27.62045</td><td>26.59188</td><td>-82.3756533333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323594915840"><td class="dateTime">2019-12-17 09:29:00</td><td>48008.69</td><td>50647.1</td><td>33.65869</td><td>32.92042</td><td>20.82971</td><td>1.023125</td><td>0.005321525</td><td>0.05349535</td><td>6.859584</td><td>95.51266</td><td>148.5691</td><td>22.27386</td><td>762.7748</td><td>0.4101853</td><td>1.547679</td><td>0.018</td><td>81</td><td>1017.92</td><td>27.62005</td><td>26.59188</td><td>-82.3756533333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595046912"><td class="dateTime">2019-12-17 09:29:02</td><td>48090.27</td><td>50735.45</td><td>33.72477</td><td>32.97811</td><td>20.79418</td><td>1.023176</td><td>0.005261247</td><td>0.05251119</td><td>6.853549</td><td>95.46252</td><td>148.4901</td><td>22.27039</td><td>762.7674</td><td>0.6021575</td><td>1.990867</td><td>0.018</td><td>81</td><td>1017.958</td><td>27.61046</td><td>26.5918933333333</td><td>-82.3756516666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595177984"><td class="dateTime">2019-12-17 09:29:04</td><td>48119.22</td><td>50771.34</td><td>33.75126</td><td>33.00137</td><td>20.81438</td><td>1.023158</td><td>0.00560089</td><td>0.0560089</td><td>6.855873</td><td>95.45753</td><td>148.4879</td><td>22.26512</td><td>762.7867</td><td>0.6295806</td><td>2.055422</td><td>0.018</td><td>81</td><td>1017.916</td><td>27.61013</td><td>26.5919016666667</td><td>-82.37566</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595309056"><td class="dateTime">2019-12-17 09:29:06</td><td>48047.37</td><td>50787.17</td><td>33.76259</td><td>33.01166</td><td>20.78365</td><td>1.023205</td><td>0.006791445</td><td>0.06791446</td><td>6.854235</td><td>95.46208</td><td>148.4901</td><td>22.25776</td><td>762.7102</td><td>0.553409</td><td>1.878682</td><td>0.018</td><td>81</td><td>1017.964</td><td>27.61873</td><td>26.5919016666667</td><td>-82.37566</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595440128"><td class="dateTime">2019-12-17 09:29:08</td><td>48087.05</td><td>50761.01</td><td>33.74302</td><td>32.99466</td><td>20.79298</td><td>1.023193</td><td>0.006825921</td><td>0.06825921</td><td>6.857315</td><td>95.50005</td><td>148.5399</td><td>22.25227</td><td>762.6769</td><td>0.4745738</td><td>1.69926</td><td>0.018</td><td>81</td><td>1017.933</td><td>27.61105</td><td>26.591915</td><td>-82.3756683333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595571200"><td class="dateTime">2019-12-17 09:29:10</td><td>48089.28</td><td>50757.63</td><td>33.74048</td><td>32.99246</td><td>20.79281</td><td>1.023194</td><td>0.006876475</td><td>0.06876476</td><td>6.857653</td><td>95.50557</td><td>148.5469</td><td>22.25126</td><td>762.6689</td><td>0.4601482</td><td>1.666267</td><td>0.018</td><td>81</td><td>1017.931</td><td>27.61035</td><td>26.591925</td><td>-82.37568</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595702272"><td class="dateTime">2019-12-17 09:29:12</td><td>48151.55</td><td>50825.9</td><td>33.79113</td><td>33.03683</td><td>20.76822</td><td>1.023234</td><td>0.006184034</td><td>0.06184033</td><td>6.848873</td><td>95.40336</td><td>148.3835</td><td>22.24401</td><td>762.7054</td><td>0.7767037</td><td>2.388022</td><td>0.018</td><td>81</td><td>1017.939</td><td>27.60988</td><td>26.591935</td><td>-82.3756866666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595833344"><td class="dateTime">2019-12-17 09:29:14</td><td>48026.09</td><td>50697.95</td><td>33.69561</td><td>32.95367</td><td>20.75678</td><td>1.023256</td><td>0.006718882</td><td>0.06718884</td><td>6.85304</td><td>95.46024</td><td>148.4778</td><td>22.24077</td><td>762.6937</td><td>0.7035168</td><td>2.219763</td><td>0.018</td><td>81</td><td>1017.965</td><td>27.59275</td><td>26.591945</td><td>-82.3756933333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323595964416"><td class="dateTime">2019-12-17 09:29:16</td><td>48165.85</td><td>50901.79</td><td>33.84726</td><td>33.08616</td><td>20.73617</td><td>1.023289</td><td>0.007788694</td><td>0.07788695</td><td>6.855516</td><td>95.51395</td><td>148.5551</td><td>22.23555</td><td>762.686</td><td>0.5479789</td><td>1.886181</td><td>0.018</td><td>81</td><td>1017.96</td><td>27.59076</td><td>26.591945</td><td>-82.3756933333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596095488"><td class="dateTime">2019-12-17 09:29:18</td><td>48723.01</td><td>51452.85</td><td>34.25861</td><td>33.44435</td><td>20.51985</td><td>1.023597</td><td>0.006518409</td><td>0.06518409</td><td>6.833562</td><td>95.42263</td><td>148.4197</td><td>22.22831</td><td>762.6526</td><td>0.5095079</td><td>1.788145</td><td>0.018</td><td>81</td><td>1017.951</td><td>27.59</td><td>26.591955</td><td>-82.375705</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596226560"><td class="dateTime">2019-12-17 09:29:20</td><td>48807.44</td><td>51539.23</td><td>34.32308</td><td>33.5005</td><td>20.48918</td><td>1.02364</td><td>0.006383129</td><td>0.06383129</td><td>6.830589</td><td>95.41171</td><td>148.4033</td><td>22.22712</td><td>762.6477</td><td>0.4982387</td><td>1.761947</td><td>0.018</td><td>81</td><td>1017.95</td><td>27.59</td><td>26.591965</td><td>-82.3757166666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596357632"><td class="dateTime">2019-12-17 09:29:22</td><td>48818.73</td><td>51546.49</td><td>34.32857</td><td>33.50521</td><td>20.48412</td><td>1.023646</td><td>0.006461714</td><td>0.06461715</td><td>6.836864</td><td>95.51123</td><td>148.5509</td><td>22.22886</td><td>762.661</td><td>0.5619809</td><td>1.884917</td><td>0.018</td><td>81</td><td>1017.93</td><td>27.59</td><td>26.5919766666667</td><td>-82.3757183333334</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596488704"><td class="dateTime">2019-12-17 09:29:24</td><td>48833.07</td><td>51562.72</td><td>34.34069</td><td>33.51577</td><td>20.47793</td><td>1.023655</td><td>0.007118941</td><td>0.0711894</td><td>6.839529</td><td>95.55275</td><td>148.5905</td><td>22.22835</td><td>762.662</td><td>0.6564215</td><td>2.123246</td><td>0.018</td><td>81</td><td>1017.939</td><td>27.58079</td><td>26.59199</td><td>-82.375725</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596619776"><td class="dateTime">2019-12-17 09:29:26</td><td>48807</td><td>51529.48</td><td>34.31606</td><td>33.49416</td><td>20.48886</td><td>1.023637</td><td>0.004334986</td><td>0.04334986</td><td>6.839972</td><td>95.5556</td><td>148.6151</td><td>22.23385</td><td>762.6418</td><td>0.7332121</td><td>2.308947</td><td>0.018</td><td>81</td><td>1017.949</td><td>27.57112</td><td>26.5920016666667</td><td>-82.3757333333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596750848"><td class="dateTime">2019-12-17 09:29:28</td><td>48806.12</td><td>51529.27</td><td>34.31581</td><td>33.49403</td><td>20.48993</td><td>1.023636</td><td>0.007915988</td><td>0.07915986</td><td>6.838154</td><td>95.52681</td><td>148.5734</td><td>22.2328</td><td>762.6202</td><td>0.5521782</td><td>1.894352</td><td>0.018</td><td>81</td><td>1017.896</td><td>27.57022</td><td>26.5920116666667</td><td>-82.3757383333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323596881920"><td class="dateTime">2019-12-17 09:29:30</td><td>48804.57</td><td>51531.04</td><td>34.31706</td><td>33.49518</td><td>20.48997</td><td>1.023637</td><td>0.007146219</td><td>0.07146221</td><td>6.828899</td><td>95.39845</td><td>148.3697</td><td>22.22983</td><td>762.6627</td><td>0.5390376</td><td>1.848131</td><td>0.01030524</td><td>81</td><td>1017.994</td><td>27.56145</td><td>26.59202</td><td>-82.375745</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597012992"><td class="dateTime">2019-12-17 09:29:32</td><td>48804.5</td><td>51531.5</td><td>34.31739</td><td>33.49548</td><td>20.48995</td><td>1.023637</td><td>0.007221189</td><td>0.0722119</td><td>6.827564</td><td>95.37978</td><td>148.3401</td><td>22.22934</td><td>762.6677</td><td>0.5286325</td><td>1.822048</td><td>0.009265264</td><td>81</td><td>1018.005</td><td>27.5603</td><td>26.5920283333333</td><td>-82.375755</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597144064"><td class="dateTime">2019-12-17 09:29:34</td><td>48828.96</td><td>51559.74</td><td>34.33842</td><td>33.51383</td><td>20.47965</td><td>1.023654</td><td>0.005902471</td><td>0.05902471</td><td>6.836232</td><td>95.50249</td><td>148.5412</td><td>22.22705</td><td>762.6417</td><td>0.7819645</td><td>2.417125</td><td>0.01738622</td><td>81</td><td>1017.982</td><td>27.55996</td><td>26.59204</td><td>-82.3757683333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597275136"><td class="dateTime">2019-12-17 09:29:36</td><td>48820.28</td><td>51551.79</td><td>34.33242</td><td>33.50866</td><td>20.48486</td><td>1.023649</td><td>0.00555841</td><td>0.0555841</td><td>6.834741</td><td>95.4735</td><td>148.4959</td><td>22.22588</td><td>762.6597</td><td>0.8114333</td><td>2.467522</td><td>0.01783871</td><td>81</td><td>1017.911</td><td>27.55129</td><td>26.5920483333333</td><td>-82.3757833333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597406208"><td class="dateTime">2019-12-17 09:29:38</td><td>48810.42</td><td>51543.53</td><td>34.32616</td><td>33.50329</td><td>20.48759</td><td>1.023645</td><td>0.005572157</td><td>0.05572158</td><td>6.83849</td><td>95.52705</td><td>148.5715</td><td>22.22425</td><td>762.6021</td><td>0.7593944</td><td>2.354918</td><td>0.018</td><td>81</td><td>1017.929</td><td>27.55035</td><td>26.5920483333333</td><td>-82.3757833333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597537280"><td class="dateTime">2019-12-17 09:29:40</td><td>48825.32</td><td>51558.73</td><td>34.33755</td><td>33.51318</td><td>20.48124</td><td>1.023654</td><td>0.004739102</td><td>0.04739102</td><td>6.840797</td><td>95.56966</td><td>148.633</td><td>22.22438</td><td>762.6413</td><td>0.7616232</td><td>2.368706</td><td>0.018</td><td>81</td><td>1017.971</td><td>27.53312</td><td>26.5920583333333</td><td>-82.3757966666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597668352"><td class="dateTime">2019-12-17 09:29:42</td><td>48826.96</td><td>51560.48</td><td>34.33885</td><td>33.51431</td><td>20.48046</td><td>1.023655</td><td>0.004631912</td><td>0.04631913</td><td>6.841284</td><td>95.578</td><td>148.645</td><td>22.22433</td><td>762.6439</td><td>0.7592504</td><td>2.364893</td><td>0.018</td><td>81</td><td>1017.978</td><td>27.53086</td><td>26.5920716666667</td><td>-82.375805</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597799424"><td class="dateTime">2019-12-17 09:29:44</td><td>48810.33</td><td>51542.55</td><td>34.32547</td><td>33.50266</td><td>20.48746</td><td>1.023645</td><td>0.005757737</td><td>0.05757738</td><td>6.835393</td><td>95.48249</td><td>148.5063</td><td>22.22466</td><td>762.6045</td><td>0.6692026</td><td>2.331141</td><td>0.018</td><td>81</td><td>1017.942</td><td>27.52997</td><td>26.5920816666667</td><td>-82.3758083333334</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323597930496"><td class="dateTime">2019-12-17 09:29:46</td><td>48825.24</td><td>51558.58</td><td>34.33744</td><td>33.51308</td><td>20.48121</td><td>1.023654</td><td>0.006379128</td><td>0.06379128</td><td>6.831405</td><td>95.56515</td><td>148.6355</td><td>22.22438</td><td>762.6429</td><td>0.7748518</td><td>2.414884</td><td>0.018</td><td>81</td><td>1017.94</td><td>27.53</td><td>26.5920933333333</td><td>-82.3758133333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598061568"><td class="dateTime">2019-12-17 09:29:48</td><td>48822.58</td><td>51556.39</td><td>34.33578</td><td>33.50813</td><td>20.48415</td><td>1.023649</td><td>0.007106912</td><td>0.07106913</td><td>6.833982</td><td>95.4825</td><td>148.5002</td><td>22.22378</td><td>762.6326</td><td>0.8379421</td><td>2.54611</td><td>0.018</td><td>81</td><td>1017.958</td><td>27.52108</td><td>26.5921016666667</td><td>-82.3758183333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598192640"><td class="dateTime">2019-12-17 09:29:50</td><td>48827.91</td><td>51561.23</td><td>34.33942</td><td>33.51438</td><td>20.48031</td><td>1.023655</td><td>0.005221643</td><td>0.05221644</td><td>6.834867</td><td>95.48863</td><td>148.513</td><td>22.22451</td><td>762.639</td><td>0.723802</td><td>2.275921</td><td>0.018</td><td>81</td><td>1017.959</td><td>27.52028</td><td>26.5921016666667</td><td>-82.3758183333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598323712"><td class="dateTime">2019-12-17 09:29:52</td><td>48824.79</td><td>51560.32</td><td>34.33866</td><td>33.51406</td><td>20.48148</td><td>1.023655</td><td>0.006751377</td><td>0.06751378</td><td>6.834295</td><td>95.47122</td><td>148.488</td><td>22.22225</td><td>762.6265</td><td>0.7949672</td><td>2.444477</td><td>0.018</td><td>81</td><td>1017.985</td><td>27.52</td><td>26.5921016666667</td><td>-82.3758183333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598454784"><td class="dateTime">2019-12-17 09:29:54</td><td>48824.58</td><td>51560.4</td><td>34.33871</td><td>33.51431</td><td>20.48146</td><td>1.023656</td><td>0.006882418</td><td>0.06882419</td><td>6.834231</td><td>95.46967</td><td>148.486</td><td>22.22196</td><td>762.6251</td><td>0.799685</td><td>2.455885</td><td>0.018</td><td>81</td><td>1017.989</td><td>27.52</td><td>26.5921283333333</td><td>-82.3758533333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598585856"><td class="dateTime">2019-12-17 09:29:56</td><td>48958.55</td><td>51708.64</td><td>34.4493</td><td>33.61061</td><td>20.42545</td><td>1.023741</td><td>0.004786899</td><td>0.04786899</td><td>6.83109</td><td>95.4779</td><td>148.4976</td><td>22.21548</td><td>762.7014</td><td>1.369281</td><td>3.773827</td><td>0.018</td><td>81</td><td>1017.962</td><td>27.50138</td><td>26.5921366666667</td><td>-82.3758616666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598716928"><td class="dateTime">2019-12-17 09:29:58</td><td>48974.35</td><td>51729.44</td><td>34.4647</td><td>33.62413</td><td>20.41885</td><td>1.023754</td><td>0.005259904</td><td>0.05259904</td><td>6.826745</td><td>95.43274</td><td>148.4402</td><td>22.21154</td><td>762.6856</td><td>2.849064</td><td>7.193869</td><td>0.018</td><td>81</td><td>1017.96</td><td>27.5002</td><td>26.59216</td><td>-82.3758816666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598848000"><td class="dateTime">2019-12-17 09:30:00</td><td>48973.29</td><td>51732.78</td><td>34.46702</td><td>33.6377</td><td>20.41516</td><td>1.023769</td><td>0.008400303</td><td>0.08400303</td><td>6.822443</td><td>95.32094</td><td>148.3037</td><td>22.20727</td><td>762.8597</td><td>3.160842</td><td>7.917083</td><td>0.018</td><td>81</td><td>1017.978</td><td>27.5</td><td>26.5921716666667</td><td>-82.3758933333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323598979072"><td class="dateTime">2019-12-17 09:30:02</td><td>48982.89</td><td>51749.12</td><td>34.47906</td><td>33.63815</td><td>20.41441</td><td>1.023769</td><td>0.006548138</td><td>0.06548138</td><td>6.827936</td><td>95.39388</td><td>148.4241</td><td>22.20023</td><td>763.0003</td><td>3.59494</td><td>8.915481</td><td>0.018</td><td>81</td><td>1017.997</td><td>27.5</td><td>26.5921883333333</td><td>-82.375905</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599110144"><td class="dateTime">2019-12-17 09:30:04</td><td>48983.2</td><td>51749.59</td><td>34.47937</td><td>33.63766</td><td>20.41495</td><td>1.023769</td><td>0.007420571</td><td>0.0742057</td><td>6.824398</td><td>95.3287</td><td>148.3445</td><td>22.20104</td><td>763.0173</td><td>3.950419</td><td>9.699337</td><td>0.018</td><td>81</td><td>1017.982</td><td>27.4915</td><td>26.5921883333333</td><td>-82.375905</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599241216"><td class="dateTime">2019-12-17 09:30:06</td><td>48983.69</td><td>51750.38</td><td>34.47994</td><td>33.63752</td><td>20.41502</td><td>1.023768</td><td>0.007431873</td><td>0.07431874</td><td>6.824195</td><td>95.32395</td><td>148.3401</td><td>22.20087</td><td>763.0247</td><td>4.015975</td><td>9.845448</td><td>0.018</td><td>81</td><td>1017.981</td><td>27.49033</td><td>26.5921983333333</td><td>-82.37592</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599372288"><td class="dateTime">2019-12-17 09:30:08</td><td>48982.79</td><td>51752.39</td><td>34.48133</td><td>33.63906</td><td>20.41533</td><td>1.02377</td><td>0.006765279</td><td>0.06765279</td><td>6.831803</td><td>95.42533</td><td>148.4994</td><td>22.1981</td><td>763.1425</td><td>4.901761</td><td>11.92819</td><td>0.018</td><td>81</td><td>1017.998</td><td>27.48051</td><td>26.5922033333333</td><td>-82.37593</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599503360"><td class="dateTime">2019-12-17 09:30:10</td><td>48988.02</td><td>51758.46</td><td>34.48586</td><td>33.643</td><td>20.41315</td><td>1.023774</td><td>0.00624697</td><td>0.0624697</td><td>6.833015</td><td>95.42881</td><td>148.5286</td><td>22.19757</td><td>763.2191</td><td>5.746539</td><td>13.86111</td><td>0.018</td><td>81</td><td>1018</td><td>27.47072</td><td>26.5922133333333</td><td>-82.3759533333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599634432"><td class="dateTime">2019-12-17 09:30:12</td><td>48988.52</td><td>51761.95</td><td>34.48835</td><td>33.64526</td><td>20.40822</td><td>1.023782</td><td>0.006468719</td><td>0.06468718</td><td>6.822865</td><td>95.27378</td><td>148.3147</td><td>22.19474</td><td>763.285</td><td>6.285116</td><td>15.11892</td><td>0.018</td><td>81</td><td>1018.009</td><td>27.4701</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599765504"><td class="dateTime">2019-12-17 09:30:14</td><td>48997.99</td><td>51767.16</td><td>34.49244</td><td>33.64865</td><td>20.40833</td><td>1.023779</td><td>0.006873049</td><td>0.0687305</td><td>6.820549</td><td>95.23862</td><td>148.2689</td><td>22.19933</td><td>763.3976</td><td>6.859909</td><td>16.4417</td><td>0.018</td><td>81</td><td>1018.001</td><td>27.46157</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323599896576"><td class="dateTime">2019-12-17 09:30:16</td><td>48999.15</td><td>51767.94</td><td>34.49303</td><td>33.64916</td><td>20.40812</td><td>1.023779</td><td>0.006935185</td><td>0.06935187</td><td>6.819781</td><td>95.22697</td><td>148.2531</td><td>22.19976</td><td>763.4142</td><td>6.952127</td><td>16.65484</td><td>0.018</td><td>81</td><td>1018</td><td>27.46054</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600027648"><td class="dateTime">2019-12-17 09:30:18</td><td>49023.15</td><td>51793.61</td><td>34.51223</td><td>33.66584</td><td>20.3985</td><td>1.023794</td><td>0.007271133</td><td>0.07271133</td><td>6.823613</td><td>95.28027</td><td>148.3514</td><td>22.19946</td><td>763.4329</td><td>7.501107</td><td>17.91247</td><td>0.009573271</td><td>81</td><td>1018.009</td><td>27.46006</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600158720"><td class="dateTime">2019-12-17 09:30:20</td><td>49006.9</td><td>51776.52</td><td>34.49944</td><td>33.65474</td><td>20.40529</td><td>1.023784</td><td>0.009509868</td><td>0.09509867</td><td>6.823088</td><td>95.26331</td><td>148.3288</td><td>22.19938</td><td>763.344</td><td>8.127304</td><td>19.37387</td><td>0.01742063</td><td>81</td><td>1018.056</td><td>27.45072</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600289792"><td class="dateTime">2019-12-17 09:30:22</td><td>49001.12</td><td>51774.69</td><td>34.49791</td><td>33.65355</td><td>20.4077</td><td>1.02379</td><td>0.00834976</td><td>0.08349761</td><td>6.821079</td><td>95.23163</td><td>148.2782</td><td>22.19528</td><td>763.4134</td><td>8.701494</td><td>20.69837</td><td>0.01790113</td><td>81</td><td>1018.014</td><td>27.441</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600420864"><td class="dateTime">2019-12-17 09:30:24</td><td>49008.98</td><td>51785.93</td><td>34.50603</td><td>33.66086</td><td>20.40619</td><td>1.023793</td><td>0.008880983</td><td>0.08880984</td><td>6.820998</td><td>95.21902</td><td>148.2626</td><td>22.19406</td><td>763.398</td><td>9.073567</td><td>21.55825</td><td>0.018</td><td>81</td><td>1017.975</td><td>27.44018</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600551936"><td class="dateTime">2019-12-17 09:30:26</td><td>48997.34</td><td>51778.44</td><td>34.50039</td><td>33.65599</td><td>20.4095</td><td>1.023788</td><td>0.007597688</td><td>0.07597688</td><td>6.815342</td><td>95.13939</td><td>148.1326</td><td>22.1883</td><td>763.3978</td><td>9.373495</td><td>22.24953</td><td>0.018</td><td>81</td><td>1018.022</td><td>27.43145</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600683008"><td class="dateTime">2019-12-17 09:30:28</td><td>48996.21</td><td>51777.99</td><td>34.50004</td><td>33.6557</td><td>20.40985</td><td>1.023788</td><td>0.007459846</td><td>0.07459846</td><td>6.814603</td><td>95.12848</td><td>148.1151</td><td>22.18751</td><td>763.3966</td><td>9.426882</td><td>22.37268</td><td>0.018</td><td>81</td><td>1018.027</td><td>27.43032</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600814080"><td class="dateTime">2019-12-17 09:30:30</td><td>49006.54</td><td>51789.84</td><td>34.50888</td><td>33.66339</td><td>20.40543</td><td>1.023795</td><td>0.008490738</td><td>0.08490739</td><td>6.810908</td><td>95.08096</td><td>148.0409</td><td>22.18626</td><td>763.426</td><td>9.682599</td><td>22.9624</td><td>0.018</td><td>81</td><td>1017.992</td><td>27.42994</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323600945152"><td class="dateTime">2019-12-17 09:30:32</td><td>49012.9</td><td>51798.83</td><td>34.51552</td><td>33.66924</td><td>20.40279</td><td>1.0238</td><td>0.008393035</td><td>0.08393036</td><td>6.81511</td><td>95.13599</td><td>148.1326</td><td>22.1841</td><td>763.4617</td><td>11.15971</td><td>26.36899</td><td>0.018</td><td>81</td><td>1018.027</td><td>27.42077</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601076224"><td class="dateTime">2019-12-17 09:30:34</td><td>49004.19</td><td>51796.37</td><td>34.52375</td><td>33.67667</td><td>20.40153</td><td>1.023809</td><td>0.008209573</td><td>0.09122743</td><td>6.808298</td><td>95.02036</td><td>147.9732</td><td>22.17765</td><td>763.4771</td><td>11.70663</td><td>27.63182</td><td>0.018</td><td>81</td><td>1018.011</td><td>27.42019</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601207296"><td class="dateTime">2019-12-17 09:30:36</td><td>49015.7</td><td>51814.02</td><td>34.52776</td><td>33.68029</td><td>20.40099</td><td>1.023813</td><td>0.00815341</td><td>0.08272088</td><td>6.80328</td><td>94.95013</td><td>147.8578</td><td>22.17565</td><td>763.5364</td><td>12.03534</td><td>28.3898</td><td>0.01035889</td><td>81</td><td>1017.976</td><td>27.41151</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601338368"><td class="dateTime">2019-12-17 09:30:38</td><td>49019.47</td><td>51821.29</td><td>34.53224</td><td>33.68429</td><td>20.39981</td><td>1.023817</td><td>0.009596495</td><td>0.09642249</td><td>6.801495</td><td>94.91566</td><td>147.8159</td><td>22.1697</td><td>763.5632</td><td>12.9139</td><td>30.41633</td><td>0.01699297</td><td>81</td><td>1018.014</td><td>27.402</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601469440"><td class="dateTime">2019-12-17 09:30:40</td><td>49020.52</td><td>51823</td><td>34.53295</td><td>33.68492</td><td>20.39964</td><td>1.023818</td><td>0.009800819</td><td>0.09798244</td><td>6.801121</td><td>94.90926</td><td>147.8071</td><td>22.16884</td><td>763.569</td><td>13.04517</td><td>30.71912</td><td>0.01765174</td><td>81</td><td>1018.018</td><td>27.40034</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601600512"><td class="dateTime">2019-12-17 09:30:42</td><td>49119.14</td><td>51921.03</td><td>34.60658</td><td>33.74867</td><td>20.35867</td><td>1.023872</td><td>0.01119927</td><td>0.1119927</td><td>6.790027</td><td>94.80198</td><td>147.6434</td><td>22.17463</td><td>763.5416</td><td>13.40172</td><td>33.48159</td><td>0.009598788</td><td>81</td><td>1017.954</td><td>27.39997</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601731584"><td class="dateTime">2019-12-17 09:30:44</td><td>49236.36</td><td>52014.41</td><td>34.67765</td><td>33.80936</td><td>20.31021</td><td>1.023931</td><td>0.0111146</td><td>0.111146</td><td>6.720131</td><td>93.98039</td><td>146.357</td><td>22.2037</td><td>763.6079</td><td>14.60319</td><td>34.48632</td><td>0.009084907</td><td>81</td><td>1017.996</td><td>27.39093</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601862656"><td class="dateTime">2019-12-17 09:30:46</td><td>49312.53</td><td>52071.64</td><td>34.72263</td><td>33.84657</td><td>20.26622</td><td>1.023939</td><td>0.01341206</td><td>0.1341206</td><td>6.68437</td><td>93.52927</td><td>145.6482</td><td>22.23812</td><td>763.6257</td><td>15.22902</td><td>35.8081</td><td>0.009</td><td>81</td><td>1017.964</td><td>27.38159</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323601993728"><td class="dateTime">2019-12-17 09:30:48</td><td>49382.68</td><td>52094.2</td><td>34.7404</td><td>33.86123</td><td>20.24842</td><td>1.023945</td><td>0.0121837</td><td>0.121837</td><td>6.640947</td><td>92.95975</td><td>144.7605</td><td>22.27642</td><td>763.5525</td><td>15.72408</td><td>36.89774</td><td>0.009</td><td>81</td><td>1018.004</td><td>27.3889</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602124800"><td class="dateTime">2019-12-17 09:30:50</td><td>49394.42</td><td>52098.88</td><td>34.74411</td><td>33.86427</td><td>20.2446</td><td>1.023946</td><td>0.01210757</td><td>0.1210757</td><td>6.634113</td><td>92.87018</td><td>144.6207</td><td>22.28278</td><td>763.5428</td><td>15.80782</td><td>37.09084</td><td>0.009</td><td>81</td><td>1018.008</td><td>27.38959</td><td>26.59222</td><td>-82.375975</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602255872"><td class="dateTime">2019-12-17 09:30:52</td><td>49387.56</td><td>52082.82</td><td>34.73235</td><td>33.85383</td><td>20.24806</td><td>1.023935</td><td>0.01421149</td><td>0.1421149</td><td>6.612138</td><td>92.57841</td><td>144.1485</td><td>22.29056</td><td>763.645</td><td>16.48409</td><td>38.65109</td><td>0.01744549</td><td>81</td><td>1017.963</td><td>27.38065</td><td>26.5922033333333</td><td>-82.3759666666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602386944"><td class="dateTime">2019-12-17 09:30:54</td><td>49413.43</td><td>52104.38</td><td>34.74871</td><td>33.86784</td><td>20.23742</td><td>1.023946</td><td>0.01175041</td><td>0.1175041</td><td>6.583124</td><td>92.17788</td><td>143.1264</td><td>22.29606</td><td>763.6306</td><td>17.8139</td><td>41.71193</td><td>0.009670703</td><td>81</td><td>1017.96</td><td>27.38008</td><td>26.5922116666667</td><td>-82.3759716666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602518016"><td class="dateTime">2019-12-17 09:30:56</td><td>49412.2</td><td>52097.57</td><td>34.74383</td><td>33.86944</td><td>20.23293</td><td>1.023945</td><td>0.01222783</td><td>0.1222783</td><td>6.54797</td><td>91.69752</td><td>142.7585</td><td>22.30131</td><td>763.6704</td><td>18.10492</td><td>42.38913</td><td>0.01722542</td><td>81</td><td>1017.969</td><td>27.37103</td><td>26.5922166666667</td><td>-82.3759866666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602649088"><td class="dateTime">2019-12-17 09:30:58</td><td>49422.59</td><td>52102.36</td><td>34.74765</td><td>33.86719</td><td>20.23312</td><td>1.023942</td><td>0.01142086</td><td>0.1142086</td><td>6.521343</td><td>91.32901</td><td>142.2101</td><td>22.30515</td><td>763.6472</td><td>18.64338</td><td>43.63162</td><td>0.009878102</td><td>81</td><td>1017.978</td><td>27.36147</td><td>26.592225</td><td>-82.37601</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602780160"><td class="dateTime">2019-12-17 09:31:00</td><td>49419.91</td><td>52095.67</td><td>34.74279</td><td>33.8624</td><td>20.23458</td><td>1.023937</td><td>0.01411994</td><td>0.1411994</td><td>6.513417</td><td>91.22235</td><td>142.0516</td><td>22.31062</td><td>763.7554</td><td>19.19617</td><td>44.90725</td><td>0.01703899</td><td>81</td><td>1017.971</td><td>27.36032</td><td>26.5922416666667</td><td>-82.3760416666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323602911232"><td class="dateTime">2019-12-17 09:31:02</td><td>49419.99</td><td>52094.99</td><td>34.7423</td><td>33.86162</td><td>20.23483</td><td>1.023937</td><td>0.01445929</td><td>0.1445929</td><td>6.511422</td><td>91.19513</td><td>142.0086</td><td>22.31151</td><td>763.7692</td><td>19.29442</td><td>45.13392</td><td>0.01766553</td><td>81</td><td>1017.97</td><td>27.35981</td><td>26.59225</td><td>-82.3760466666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603042304"><td class="dateTime">2019-12-17 09:31:04</td><td>49441.37</td><td>52117.05</td><td>34.75885</td><td>33.87609</td><td>20.22598</td><td>1.023949</td><td>0.01363145</td><td>0.1363145</td><td>6.494287</td><td>90.94998</td><td>141.65</td><td>22.31207</td><td>763.7449</td><td>19.81114</td><td>46.3246</td><td>0.01810784</td><td>81</td><td>1017.989</td><td>27.36</td><td>26.5922566666667</td><td>-82.3760616666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603173376"><td class="dateTime">2019-12-17 09:31:06</td><td>49454.02</td><td>52126.89</td><td>34.76635</td><td>33.88248</td><td>20.2208</td><td>1.023954</td><td>0.00920112</td><td>0.0920112</td><td>6.483635</td><td>90.81281</td><td>141.4314</td><td>22.31539</td><td>763.7903</td><td>20.61538</td><td>48.18017</td><td>0.009746567</td><td>81</td><td>1017.962</td><td>27.35083</td><td>26.5922633333333</td><td>-82.37607</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603304448"><td class="dateTime">2019-12-17 09:31:08</td><td>49429</td><td>52098.1</td><td>34.74487</td><td>33.86377</td><td>20.22939</td><td>1.023939</td><td>0.01147078</td><td>0.1147078</td><td>6.463737</td><td>90.51536</td><td>140.9875</td><td>22.31769</td><td>763.8538</td><td>20.45502</td><td>47.80883</td><td>0.0171786</td><td>81</td><td>1017.987</td><td>27.35019</td><td>26.59227</td><td>-82.3760783333334</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603435520"><td class="dateTime">2019-12-17 09:31:10</td><td>49430.14</td><td>52098.87</td><td>34.74547</td><td>33.86427</td><td>20.23039</td><td>1.023937</td><td>0.01011128</td><td>0.1011127</td><td>6.451147</td><td>90.35887</td><td>140.712</td><td>22.31787</td><td>763.7555</td><td>20.80683</td><td>48.62125</td><td>0.0177452</td><td>81</td><td>1017.945</td><td>27.35</td><td>26.59227</td><td>-82.3760783333334</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603566592"><td class="dateTime">2019-12-17 09:31:12</td><td>49451.3</td><td>52119.35</td><td>34.76088</td><td>33.87758</td><td>20.22186</td><td>1.023948</td><td>0.01305907</td><td>0.1305907</td><td>6.444923</td><td>90.27572</td><td>140.5926</td><td>22.3198</td><td>763.7332</td><td>20.41486</td><td>47.71674</td><td>0.018</td><td>81</td><td>1017.95</td><td>27.34135</td><td>26.592285</td><td>-82.3761066666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603697664"><td class="dateTime">2019-12-17 09:31:14</td><td>49454.56</td><td>52122.54</td><td>34.76328</td><td>33.87965</td><td>20.22062</td><td>1.02395</td><td>0.01340327</td><td>0.1340327</td><td>6.443681</td><td>90.25987</td><td>140.5679</td><td>22.32007</td><td>763.7253</td><td>20.37501</td><td>47.62482</td><td>0.018</td><td>81</td><td>1017.949</td><td>27.34012</td><td>26.592285</td><td>-82.3761066666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603828736"><td class="dateTime">2019-12-17 09:31:16</td><td>49432.51</td><td>52100.91</td><td>34.74702</td><td>33.86559</td><td>20.2296</td><td>1.023938</td><td>0.01301584</td><td>0.1301584</td><td>6.438218</td><td>90.17332</td><td>140.3426</td><td>22.31853</td><td>763.7476</td><td>20.01619</td><td>46.79776</td><td>0.009813264</td><td>81</td><td>1017.959</td><td>27.33085</td><td>26.5923</td><td>-82.37611</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323603959808"><td class="dateTime">2019-12-17 09:31:18</td><td>49437.4</td><td>52107.09</td><td>34.75161</td><td>33.87378</td><td>20.22435</td><td>1.023945</td><td>0.01235516</td><td>0.1120714</td><td>6.427138</td><td>90.03826</td><td>140.1902</td><td>22.31755</td><td>763.6046</td><td>19.69327</td><td>46.05189</td><td>0.01710699</td><td>81</td><td>1017.933</td><td>27.33025</td><td>26.5923016666667</td><td>-82.3761133333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323604090880"><td class="dateTime">2019-12-17 09:31:20</td><td>49433.17</td><td>52100.68</td><td>34.74688</td><td>33.86597</td><td>20.22892</td><td>1.023938</td><td>0.01396744</td><td>0.1382246</td><td>6.423695</td><td>89.98867</td><td>140.1144</td><td>22.31926</td><td>763.6036</td><td>19.72631</td><td>46.12804</td><td>0.009995337</td><td>81</td><td>1017.965</td><td>27.33</td><td>26.5923016666667</td><td>-82.3761133333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323604221952"><td class="dateTime">2019-12-17 09:31:22</td><td>49446.98</td><td>52115.29</td><td>34.75782</td><td>33.87514</td><td>20.22352</td><td>1.023946</td><td>0.01255223</td><td>0.1249508</td><td>6.423584</td><td>89.99168</td><td>140.124</td><td>22.31935</td><td>763.6558</td><td>19.86513</td><td>46.44651</td><td>0.009392347</td><td>81</td><td>1017.968</td><td>27.32158</td><td>26.59229</td><td>-82.37612</td><td></td></tr>
+<tr class="data-marked" isi-data-row="" isi-timestamp="103323604353024" isi-marked=""><td class="dateTime">2019-12-17 09:31:24</td><td>49448.71</td><td>52117.04</td><td>34.75914</td><td>33.87606</td><td>20.22298</td><td>1.023947</td><td>0.01242137</td><td>0.1242562</td><td>6.423549</td><td>89.99158</td><td>140.1241</td><td>22.31943</td><td>763.6645</td><td>19.88911</td><td>46.50159</td><td>0.008970868</td><td>81</td><td>1017.97</td><td>27.3204</td><td>26.5922783333333</td><td>-82.376105</td><td>Marked</td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323604484096"><td class="dateTime">2019-12-17 09:31:26</td><td>49445.41</td><td>52111.48</td><td>34.75505</td><td>33.87246</td><td>20.22433</td><td>1.023943</td><td>0.01201214</td><td>0.1201214</td><td>6.427209</td><td>90.03601</td><td>140.2048</td><td>22.32141</td><td>763.7025</td><td>19.8829</td><td>46.31432</td><td>0.01744363</td><td>81</td><td>1017.951</td><td>27.3106</td><td>26.5922683333333</td><td>-82.3760983333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323604615168"><td class="dateTime">2019-12-17 09:31:28</td><td>49453.2</td><td>52117.43</td><td>34.75959</td><td>33.87633</td><td>20.22114</td><td>1.023946</td><td>0.01138046</td><td>0.1138046</td><td>6.424573</td><td>89.97034</td><td>140.1025</td><td>22.32358</td><td>763.6702</td><td>20.27659</td><td>47.38219</td><td>0.01792229</td><td>81</td><td>1017.959</td><td>27.31009</td><td>26.5922683333333</td><td>-82.3760983333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323604746240"><td class="dateTime">2019-12-17 09:31:30</td><td>49453.11</td><td>52116.29</td><td>34.75877</td><td>33.86413</td><td>20.22753</td><td>1.023935</td><td>0.009955737</td><td>0.09955737</td><td>6.414297</td><td>89.85011</td><td>139.9201</td><td>22.32457</td><td>763.6946</td><td>20.12912</td><td>47.05257</td><td>0.018</td><td>81</td><td>1017.995</td><td>27.31</td><td>26.5922683333333</td><td>-82.3760983333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323604877312"><td class="dateTime">2019-12-17 09:31:32</td><td>49440.86</td><td>52106.9</td><td>34.75161</td><td>33.86817</td><td>20.22692</td><td>1.02394</td><td>0.01065415</td><td>0.1065415</td><td>6.41428</td><td>89.84645</td><td>139.9171</td><td>22.32586</td><td>763.7029</td><td>20.3523</td><td>47.57248</td><td>0.01016501</td><td>81</td><td>1017.964</td><td>27.31</td><td>26.5922716666667</td><td>-82.3761133333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605008384"><td class="dateTime">2019-12-17 09:31:34</td><td>49439.77</td><td>52105.67</td><td>34.75069</td><td>33.86824</td><td>20.22688</td><td>1.02394</td><td>0.01248275</td><td>0.1248275</td><td>6.410361</td><td>89.79234</td><td>139.8332</td><td>22.32187</td><td>763.6916</td><td>20.12469</td><td>47.04756</td><td>0.0170105</td><td>81</td><td>1017.97</td><td>27.30145</td><td>26.5922766666667</td><td>-82.3761233333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605139456"><td class="dateTime">2019-12-17 09:31:36</td><td>49439.09</td><td>52105.11</td><td>34.75026</td><td>33.86852</td><td>20.2268</td><td>1.02394</td><td>0.01278291</td><td>0.1278291</td><td>6.409891</td><td>89.78553</td><td>139.8227</td><td>22.32136</td><td>763.6902</td><td>20.10318</td><td>46.99802</td><td>0.01764204</td><td>81</td><td>1017.969</td><td>27.30024</td><td>26.5922766666667</td><td>-82.3761233333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605270528"><td class="dateTime">2019-12-17 09:31:38</td><td>49442.39</td><td>52106.32</td><td>34.75126</td><td>33.86911</td><td>20.22556</td><td>1.02394</td><td>0.01135685</td><td>0.1135685</td><td>6.408227</td><td>89.76776</td><td>139.7918</td><td>22.32325</td><td>763.7181</td><td>19.92733</td><td>46.59312</td><td>0.009499154</td><td>81</td><td>1017.951</td><td>27.2999</td><td>26.5922816666667</td><td>-82.376135</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605401600"><td class="dateTime">2019-12-17 09:31:40</td><td>49442.7</td><td>52107.11</td><td>34.75183</td><td>33.86962</td><td>20.22543</td><td>1.023941</td><td>0.01343099</td><td>0.1343099</td><td>6.405616</td><td>89.7276</td><td>139.8215</td><td>22.32286</td><td>763.6785</td><td>20.05288</td><td>46.88292</td><td>0.01724104</td><td>81</td><td>1017.931</td><td>27.29088</td><td>26.5922816666667</td><td>-82.376135</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605532672"><td class="dateTime">2019-12-17 09:31:42</td><td>49440.14</td><td>52103.82</td><td>34.74939</td><td>33.86748</td><td>20.22723</td><td>1.023937</td><td>0.01084448</td><td>0.1084448</td><td>6.403573</td><td>89.69752</td><td>139.6969</td><td>22.32343</td><td>763.7227</td><td>19.34151</td><td>45.24257</td><td>0.01783481</td><td>81</td><td>1017.948</td><td>27.29018</td><td>26.5922816666667</td><td>-82.376135</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605663744"><td class="dateTime">2019-12-17 09:31:44</td><td>49436.91</td><td>52101.43</td><td>34.74756</td><td>33.86593</td><td>20.22788</td><td>1.023937</td><td>0.009650027</td><td>0.09650028</td><td>6.407529</td><td>89.75111</td><td>139.774</td><td>22.32403</td><td>763.6006</td><td>18.64331</td><td>43.63073</td><td>0.018</td><td>81</td><td>1017.976</td><td>27.28121</td><td>26.5922983333333</td><td>-82.376145</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605794816"><td class="dateTime">2019-12-17 09:31:46</td><td>49437.61</td><td>52098.88</td><td>34.74577</td><td>33.86427</td><td>20.22754</td><td>1.023935</td><td>0.01011848</td><td>0.1011848</td><td>6.409421</td><td>89.79566</td><td>139.8185</td><td>22.32579</td><td>763.6278</td><td>17.93111</td><td>41.98912</td><td>0.018</td><td>81</td><td>1017.936</td><td>27.27177</td><td>26.5922983333333</td><td>-82.376145</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323605925888"><td class="dateTime">2019-12-17 09:31:48</td><td>49437.58</td><td>52098.45</td><td>34.74546</td><td>33.86399</td><td>20.22751</td><td>1.023935</td><td>0.01014937</td><td>0.1014937</td><td>6.409873</td><td>89.80441</td><td>139.829</td><td>22.32606</td><td>763.6259</td><td>17.8075</td><td>41.70408</td><td>0.018</td><td>81</td><td>1017.931</td><td>27.27008</td><td>26.5922983333333</td><td>-82.376145</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606056960"><td class="dateTime">2019-12-17 09:31:50</td><td>49444.86</td><td>52106.12</td><td>34.75121</td><td>33.86898</td><td>20.22455</td><td>1.023939</td><td>0.01286346</td><td>0.1286346</td><td>6.409781</td><td>89.80153</td><td>139.8318</td><td>22.32596</td><td>763.5582</td><td>17.30857</td><td>40.5516</td><td>0.018</td><td>81</td><td>1017.929</td><td>27.26033</td><td>26.5922983333333</td><td>-82.376145</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606188032"><td class="dateTime">2019-12-17 09:31:52</td><td>49442.86</td><td>52104.64</td><td>34.75008</td><td>33.86802</td><td>20.22537</td><td>1.023939</td><td>0.01481523</td><td>0.1481523</td><td>6.412688</td><td>89.8489</td><td>139.8931</td><td>22.32538</td><td>763.5262</td><td>16.86017</td><td>38.18076</td><td>0.018</td><td>81</td><td>1017.93</td><td>27.25998</td><td>26.5922983333333</td><td>-82.376145</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606319104"><td class="dateTime">2019-12-17 09:31:54</td><td>49438.65</td><td>52102.34</td><td>34.74828</td><td>33.86502</td><td>20.22873</td><td>1.023937</td><td>0.01584498</td><td>0.1181828</td><td>6.419903</td><td>89.94566</td><td>140.0387</td><td>22.32333</td><td>763.4634</td><td>15.76098</td><td>36.86501</td><td>0.018</td><td>81</td><td>1017.948</td><td>27.2509</td><td>26.592315</td><td>-82.3761583333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606450176"><td class="dateTime">2019-12-17 09:31:56</td><td>49409.11</td><td>52076.59</td><td>34.72878</td><td>33.84955</td><td>20.23944</td><td>1.023924</td><td>0.01267869</td><td>0.1205524</td><td>6.422876</td><td>89.97929</td><td>140.0809</td><td>22.3182</td><td>763.4099</td><td>15.14223</td><td>35.50338</td><td>0.018</td><td>81</td><td>1017.949</td><td>27.24208</td><td>26.5923233333333</td><td>-82.3761683333334</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606581248"><td class="dateTime">2019-12-17 09:31:58</td><td>49405.51</td><td>52073.52</td><td>34.72646</td><td>33.84763</td><td>20.24083</td><td>1.023923</td><td>0.01235707</td><td>0.1193212</td><td>6.423554</td><td>89.98763</td><td>140.0926</td><td>22.31751</td><td>763.4008</td><td>15.01973</td><td>35.29187</td><td>0.018</td><td>81</td><td>1017.95</td><td>27.24063</td><td>26.5923233333333</td><td>-82.3761683333334</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606712320"><td class="dateTime">2019-12-17 09:32:00</td><td>49402.96</td><td>52076.41</td><td>34.72841</td><td>33.84964</td><td>20.24173</td><td>1.023926</td><td>0.01166184</td><td>0.1159082</td><td>6.427419</td><td>90.04183</td><td>140.1669</td><td>22.31219</td><td>763.3284</td><td>14.40637</td><td>33.85239</td><td>0.018</td><td>81</td><td>1017.95</td><td>27.24946</td><td>26.5923283333333</td><td>-82.37618</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606843392"><td class="dateTime">2019-12-17 09:32:02</td><td>49392.92</td><td>52076.24</td><td>34.72789</td><td>33.84955</td><td>20.24582</td><td>1.023928</td><td>0.01257965</td><td>0.1257965</td><td>6.430521</td><td>90.02815</td><td>140.1283</td><td>22.30227</td><td>763.2682</td><td>13.17643</td><td>31.00882</td><td>0.018</td><td>81</td><td>1017.904</td><td>27.24075</td><td>26.5923283333333</td><td>-82.37618</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323606974464"><td class="dateTime">2019-12-17 09:32:04</td><td>49305.12</td><td>52004.09</td><td>34.67308</td><td>33.75362</td><td>20.32985</td><td>1.023861</td><td>0.01351435</td><td>0.1351435</td><td>6.440789</td><td>90.05804</td><td>140.1902</td><td>22.28276</td><td>763.2968</td><td>12.18637</td><td>28.72541</td><td>0.018</td><td>81</td><td>1017.963</td><td>27.24018</td><td>26.592335</td><td>-82.3761883333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607105536"><td class="dateTime">2019-12-17 09:32:06</td><td>49063.32</td><td>51823.04</td><td>34.53474</td><td>33.67931</td><td>20.38745</td><td>1.023803</td><td>0.01356504</td><td>0.1356504</td><td>6.459827</td><td>90.24066</td><td>140.4691</td><td>22.23708</td><td>763.2007</td><td>11.8633</td><td>27.98835</td><td>0.01016972</td><td>81</td><td>1017.968</td><td>27.24</td><td>26.592335</td><td>-82.3761883333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607236608"><td class="dateTime">2019-12-17 09:32:08</td><td>49050.73</td><td>51826.71</td><td>34.53683</td><td>33.68532</td><td>20.38907</td><td>1.023812</td><td>0.009731724</td><td>0.09731724</td><td>6.492857</td><td>90.69099</td><td>141.1658</td><td>22.19904</td><td>763.204</td><td>11.2637</td><td>26.59832</td><td>0.01695049</td><td>81</td><td>1017.936</td><td>27.23154</td><td>26.5923433333333</td><td>-82.3761983333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607367680"><td class="dateTime">2019-12-17 09:32:10</td><td>49039.34</td><td>51820.03</td><td>34.53163</td><td>33.68372</td><td>20.3911</td><td>1.023811</td><td>0.009198799</td><td>0.091988</td><td>6.498136</td><td>90.76056</td><td>141.2731</td><td>22.19201</td><td>763.2001</td><td>11.17534</td><td>26.3939</td><td>0.01754843</td><td>81</td><td>1017.931</td><td>27.23037</td><td>26.5923433333333</td><td>-82.3761983333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607498752"><td class="dateTime">2019-12-17 09:32:12</td><td>49034.45</td><td>51808.83</td><td>34.52349</td><td>33.67574</td><td>20.39382</td><td>1.023803</td><td>0.009753811</td><td>0.09753811</td><td>6.53603</td><td>91.29154</td><td>142.101</td><td>22.19623</td><td>763.1456</td><td>10.82203</td><td>25.57752</td><td>0.009544752</td><td>81</td><td>1017.948</td><td>27.22054</td><td>26.5923516666667</td><td>-82.37621</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607629824"><td class="dateTime">2019-12-17 09:32:14</td><td>49018.86</td><td>51789.81</td><td>34.50936</td><td>33.66338</td><td>20.40031</td><td>1.023792</td><td>0.01107057</td><td>0.1107057</td><td>6.572894</td><td>91.80957</td><td>143.6234</td><td>22.19875</td><td>763.1078</td><td>9.489783</td><td>22.50923</td><td>0.009046566</td><td>81</td><td>1017.94</td><td>27.22928</td><td>26.5923516666667</td><td>-82.37621</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607760896"><td class="dateTime">2019-12-17 09:32:16</td><td>49038.71</td><td>51810.5</td><td>34.52484</td><td>33.67682</td><td>20.38845</td><td>1.023809</td><td>0.007007382</td><td>0.07007384</td><td>6.635021</td><td>92.6953</td><td>144.33</td><td>22.19903</td><td>763.0983</td><td>9.071301</td><td>21.54488</td><td>0.01715639</td><td>81</td><td>1017.931</td><td>27.22987</td><td>26.5923583333333</td><td>-82.37622</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323607891968"><td class="dateTime">2019-12-17 09:32:18</td><td>49030.7</td><td>51801.52</td><td>34.51814</td><td>33.67099</td><td>20.395</td><td>1.023798</td><td>0.008524025</td><td>0.08524025</td><td>6.661911</td><td>93.06723</td><td>144.8579</td><td>22.19896</td><td>763.0641</td><td>8.461586</td><td>20.13141</td><td>0.009864014</td><td>81</td><td>1017.983</td><td>27.22117</td><td>26.5923616666667</td><td>-82.37623</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608023040"><td class="dateTime">2019-12-17 09:32:20</td><td>49036.26</td><td>51805.95</td><td>34.52151</td><td>33.67387</td><td>20.39295</td><td>1.0238</td><td>0.008454127</td><td>0.08454127</td><td>6.68388</td><td>93.3807</td><td>145.3249</td><td>22.20083</td><td>763.0543</td><td>8.437819</td><td>20.08165</td><td>0.01699964</td><td>81</td><td>1017.979</td><td>27.22031</td><td>26.59237</td><td>-82.37624</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608154112"><td class="dateTime">2019-12-17 09:32:22</td><td>49025.29</td><td>51790.43</td><td>34.51005</td><td>33.66378</td><td>20.39763</td><td>1.02379</td><td>0.01070707</td><td>0.1070707</td><td>6.70337</td><td>93.65408</td><td>145.7477</td><td>22.20464</td><td>763.0146</td><td>7.717016</td><td>18.40994</td><td>0.01007806</td><td>81</td><td>1017.938</td><td>27.21161</td><td>26.592375</td><td>-82.37625</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608285184"><td class="dateTime">2019-12-17 09:32:24</td><td>49024.04</td><td>51788.49</td><td>34.50863</td><td>33.66252</td><td>20.39816</td><td>1.023789</td><td>0.01101081</td><td>0.1101081</td><td>6.706797</td><td>93.70242</td><td>145.8224</td><td>22.20525</td><td>763.0089</td><td>7.619296</td><td>18.18352</td><td>0.009459534</td><td>81</td><td>1017.932</td><td>27.21042</td><td>26.592375</td><td>-82.37625</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608416256"><td class="dateTime">2019-12-17 09:32:26</td><td>49047.79</td><td>51811.49</td><td>34.52591</td><td>33.67747</td><td>20.38828</td><td>1.023802</td><td>0.007454558</td><td>0.07454559</td><td>6.721739</td><td>93.92926</td><td>146.1665</td><td>22.20725</td><td>762.9858</td><td>7.164944</td><td>16.05783</td><td>0.008978688</td><td>81</td><td>1017.977</td><td>27.2194</td><td>26.59238</td><td>-82.3762616666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608547328"><td class="dateTime">2019-12-17 09:32:28</td><td>49044.82</td><td>51808.41</td><td>34.5236</td><td>33.67546</td><td>20.38951</td><td>1.0238</td><td>0.007567929</td><td>0.07567929</td><td>6.732796</td><td>94.08525</td><td>146.7255</td><td>22.2072</td><td>762.9639</td><td>6.220797</td><td>14.8757</td><td>0.01729265</td><td>81</td><td>1017.979</td><td>27.20153</td><td>26.5923933333333</td><td>-82.3762666666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608678400"><td class="dateTime">2019-12-17 09:32:30</td><td>49027.75</td><td>51793.3</td><td>34.52325</td><td>33.67528</td><td>20.391</td><td>1.023801</td><td>0.006770142</td><td>0.08478572</td><td>6.750557</td><td>94.33312</td><td>146.817</td><td>22.2044</td><td>762.9425</td><td>5.675146</td><td>13.68511</td><td>0.01785153</td><td>81</td><td>1017.997</td><td>27.20919</td><td>26.592405</td><td>-82.3762733333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608809472"><td class="dateTime">2019-12-17 09:32:32</td><td>49031.09</td><td>51798.03</td><td>34.51695</td><td>33.66983</td><td>20.39458</td><td>1.023796</td><td>0.009592898</td><td>0.09788446</td><td>6.762264</td><td>94.50339</td><td>147.0408</td><td>22.20361</td><td>762.8229</td><td>5.185235</td><td>12.57986</td><td>0.01017838</td><td>81</td><td>1017.947</td><td>27.2097</td><td>26.5924166666667</td><td>-82.3762716666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323608940544"><td class="dateTime">2019-12-17 09:32:34</td><td>49030.83</td><td>51798.05</td><td>34.51609</td><td>33.66909</td><td>20.39512</td><td>1.023795</td><td>0.009940828</td><td>0.1000384</td><td>6.764549</td><td>94.53621</td><td>147.0722</td><td>22.20338</td><td>762.8059</td><td>5.100561</td><td>12.38543</td><td>0.009117603</td><td>81</td><td>1017.941</td><td>27.2102</td><td>26.59243</td><td>-82.3762733333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609071616"><td class="dateTime">2019-12-17 09:32:36</td><td>49030.78</td><td>51795.03</td><td>34.51341</td><td>33.66666</td><td>20.39542</td><td>1.023793</td><td>0.007355662</td><td>0.07335611</td><td>6.779827</td><td>94.75758</td><td>147.4154</td><td>22.20583</td><td>762.7678</td><td>4.387903</td><td>10.04996</td><td>0.008906419</td><td>81</td><td>1018.005</td><td>27.20055</td><td>26.5924416666667</td><td>-82.376275</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609202688"><td class="dateTime">2019-12-17 09:32:38</td><td>49017.92</td><td>51778.66</td><td>34.5014</td><td>33.65613</td><td>20.39582</td><td>1.023788</td><td>0.006294303</td><td>0.06294305</td><td>6.792927</td><td>94.95574</td><td>147.7069</td><td>22.20849</td><td>762.7217</td><td>3.56246</td><td>8.743744</td><td>0.009</td><td>81</td><td>1017.965</td><td>27.20889</td><td>26.592455</td><td>-82.3762833333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609333760"><td class="dateTime">2019-12-17 09:32:40</td><td>49032.27</td><td>51791.74</td><td>34.51126</td><td>33.66463</td><td>20.39417</td><td>1.02379</td><td>0.008106651</td><td>0.0810665</td><td>6.787879</td><td>94.90281</td><td>147.6009</td><td>22.21025</td><td>762.6132</td><td>2.977941</td><td>7.440227</td><td>0.009</td><td>81</td><td>1017.944</td><td>27.20102</td><td>26.5924633333333</td><td>-82.37629</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609464832"><td class="dateTime">2019-12-17 09:32:42</td><td>49012.14</td><td>51764.99</td><td>34.49146</td><td>33.64724</td><td>20.40289</td><td>1.023773</td><td>0.006433241</td><td>0.06433241</td><td>6.796276</td><td>95.01894</td><td>147.7783</td><td>22.2157</td><td>762.5543</td><td>2.52241</td><td>6.434622</td><td>0.0167048</td><td>81</td><td>1017.958</td><td>27.20039</td><td>26.59247</td><td>-82.3762983333333</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609595904"><td class="dateTime">2019-12-17 09:32:44</td><td>49010</td><td>51761.91</td><td>34.48919</td><td>33.64524</td><td>20.40404</td><td>1.023771</td><td>0.006278913</td><td>0.06278912</td><td>6.797124</td><td>95.03114</td><td>147.7961</td><td>22.2165</td><td>762.5424</td><td>2.444987</td><td>6.258309</td><td>0.01777984</td><td>81</td><td>1017.959</td><td>27.19993</td><td>26.59248</td><td>-82.3763116666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609726976"><td class="dateTime">2019-12-17 09:32:46</td><td>49029.81</td><td>51787.88</td><td>34.50842</td><td>33.66212</td><td>20.39575</td><td>1.023787</td><td>0.008144584</td><td>0.08144584</td><td>6.805209</td><td>95.15305</td><td>147.9772</td><td>22.21168</td><td>762.4987</td><td>1.79572</td><td>4.754097</td><td>0.009514099</td><td>81</td><td>1017.988</td><td>27.2</td><td>26.59249</td><td>-82.3763266666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609858048"><td class="dateTime">2019-12-17 09:32:48</td><td>49030.08</td><td>51788.45</td><td>34.50884</td><td>33.66249</td><td>20.39564</td><td>1.023788</td><td>0.008828866</td><td>0.08828867</td><td>6.801009</td><td>95.09964</td><td>148.1343</td><td>22.2114</td><td>762.3945</td><td>0.6969441</td><td>2.204772</td><td>0.009038646</td><td>81</td><td>1017.953</td><td>27.2</td><td>26.5924983333333</td><td>-82.3763366666667</td><td></td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323609989120"><td class="dateTime">2019-12-17 09:32:50</td><td>49015.68</td><td>51769.3</td><td>34.49466</td><td>33.65004</td><td>20.39725</td><td>1.02378</td><td>0.008174003</td><td>0.08174004</td><td>6.810822</td><td>95.26939</td><td>148.1297</td><td>22.21517</td><td>762.2855</td><td>0.4339812</td><td>1.611974</td><td>0.0170871</td><td>81</td><td>1017.932</td><td>27.2</td><td>26.592505</td><td>-82.37635</td><td></td></tr>
+<tr class="data-marked" isi-data-row="" isi-timestamp="103323610120192" isi-marked=""><td class="dateTime">2019-12-17 09:32:52</td><td>49024.76</td><td>51788.02</td><td>34.50891</td><td>33.66221</td><td>20.39135</td><td>1.023785</td><td>0.006405438</td><td>0.06405438</td><td>6.812023</td><td>95.30212</td><td>148.1558</td><td>22.21784</td><td>762.2813</td><td>0.5589138</td><td>1.901821</td><td>0.01778785</td><td>81</td><td>1017.957</td><td>27.2</td><td>26.5925066666667</td><td>-82.3763616666667</td><td>Marked</td></tr>
+<tr class="data" isi-data-row="" isi-timestamp="103323610251264"><td class="dateTime">2019-12-17 09:32:54</td><td>49045.62</td><td>51793.32</td><td>34.51299</td><td>33.66566</td><td>20.38829</td><td>1.023787</td><td>0.007678159</td><td>0.07678159</td><td>6.815985</td><td>95.36208</td><td>148.2456</td><td>22.22384</td><td>762.3181</td><td>0.5117316</td><td>1.802555</td><td>0.01025216</td><td>81</td><td>1017.907</td><td>27.19139</td><td>26.5925116666667</td><td>-82.376375</td><td></td></tr>
+</table>
+</body>
+</html>
+<!-- JIL2+BR580d5QwsLfjee5qhdbFTpeZCuojt6P42m+W1PRa0cf5VTa5byBYQpKSITq6C7eXbRx5gLY4VeX+nkCw== -->

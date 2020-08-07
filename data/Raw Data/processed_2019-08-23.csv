@@ -1,0 +1,3 @@
+csv,dtime,chl_mgL,depth_ft,lat_dd,lon_dd,o2_mgL,salinity_psu,temp_c,bdepth_ft
+VuSitu_2019-08-23_16-00-07_Device Location_LiveReadings.csv,2019-08-23T16:00:07Z,0.1062857,-0.9306744,26.6340483333333,-82.0667733333333,8.069966,0,25.46607,-0
+VuSitu_2019-08-23_16-00-07_Device Location_LiveReadings.csv,2019-08-23T16:00:09Z,0.124773,-0.9194843,26.6340483333333,-82.0667733333333,8.066883,0,25.46865,-0

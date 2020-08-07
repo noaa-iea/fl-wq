@@ -1,0 +1,5 @@
+csv,dtime,chl_mgL,depth_ft,o2_mgL,salinity_psu,temp_c,lon_dd,lat_dd
+VuSitu_2019-11-10_12-59-22_Device Location_LiveReadings.csv,2019-11-10T12:59:38Z,0.1795296,1.021014,8.77475,0,23.43055,NA,NA
+VuSitu_2019-11-10_12-59-22_Device Location_LiveReadings.csv,2019-11-10T12:59:40Z,0.1790743,1.080866,8.775736,0,23.42912,NA,NA
+VuSitu_2019-11-10_13-05-13_Device Location_LiveReadings.csv,2019-11-10T13:05:35Z,318.2258,1.468353,8.929019,31.35368,24.92974,NA,NA
+VuSitu_2019-11-10_13-05-13_Device Location_LiveReadings.csv,2019-11-10T13:05:37Z,325.669,1.486689,8.909344,31.99641,24.96001,NA,NA
