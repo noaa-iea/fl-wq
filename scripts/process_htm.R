@@ -5,7 +5,6 @@
 # - process all htm files into csv files
 # - process all dates by directories containing csv files
 #   - for each csv, apply filters before combining into single date csv
-# 
 
 # load libraries ----
 if (!require(librarian)){
@@ -42,6 +41,21 @@ metrics <- tribble(
   "temp_c"      , "Temperature")
 
 # define functions ----
+get_date_dirs <- function(dir_data){
+  tibble(
+    dir  = list.dirs(dir_data, recursive = F) %>% 
+      str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$"),
+    date = str_replace(dir, ".*/([0-9]{4}-[0-9]{2}-[0-9]{2})$", "\\1") %>% as.Date())
+}
+
+get_processed_dates <- function(dir_data){
+  tibble(
+    file  = list.files(dir_data, recursive = F) %>% 
+      str_subset("^processed_[0-9]{4}-[0-9]{2}-[0-9]{2}.csv$"),
+    date = str_replace(file, ".*([0-9]{4}-[0-9]{2}-[0-9]{2}).csv$", "\\1")) %>% 
+    pull(date)
+}
+
 process_htm <- function(htm, csv, yml, redo = F){
   # htm <- htm_files$htm[1]; csv <- htm_files$csv[1]; yml <- htm_files$yml[1]
 
@@ -333,22 +347,26 @@ process_date <- function(dir, redo = F){
   # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2020-01-31"
   # dir <- date_dirs[1]
   # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2019-08-23"
+  # dir = "/Users/bbest/github/watermon-app/data/Raw Data/2019-11-10"; redo = T
   
   message(glue("process_date dir: {dir}"))
   
   date_csv <- glue("{dir_data}/processed_{basename(dir)}.csv")
   
-  if (file.exists(date_csv) & redo = F) return()
+  if (file.exists(date_csv) & redo == F) return()
   
   csvs <- list.files(dir, ".*csv$", recursive = T, full.names = T)
   
   d <- map_df(setNames(csvs, basename(csvs)), process_csv, .id = "csv")
-  #names(d)
   
   write_csv(d, date_csv)
   
-  process_bathy(date_csv)
-  # TODO: process depth
+  if (all(is.na(d$lon_dd) | is.na(d$lat_dd))){
+    file_move(date_csv, glue("{dir_data}/processed_{basename(dir)}_no-lon-lat.csv"))
+  } else {
+    process_bathy(date_csv)  
+    # TODO: process depth
+  }
 }
 
 # get local zips ----
@@ -409,12 +427,6 @@ htm_files <- tibble(
 pwalk(htm_files, process_htm, redo = T)
 
 # get dates ----
-get_date_dirs <- function(dir_data){
-  tibble(
-    dir  = list.dirs(dir_data, recursive = F) %>% 
-      str_subset(".*/[0-9]{4}-[0-9]{2}-[0-9]{2}$"),
-    date = str_replace(dir, ".*/([0-9]{4}-[0-9]{2}-[0-9]{2})$", "\\1") %>% as.Date())
-}
 date_dirs <- get_date_dirs(dir_data)$dir
 
 # process date directories ----
