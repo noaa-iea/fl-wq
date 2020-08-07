@@ -1,12 +1,26 @@
 # watermon-app
 Florida Commercial Watermen's Conservation (FCWC) citizen science water quality monitoring application
 
+Please visit https://marinebon.org/watermon-app for the output website dashboard.
+
 ## process
 
 - drop at least 3 casts (csv ea)
 - only want downward casts, not return or noise in beginning
 
 ## next steps
+
+1. Turn on Github Actions to regularly (eg daily), render website, which will involve a few more tasks:
+  - `use` docker image of Rmarkdown
+  - store Ben's Oauth Google Drive token to access files
+  - email Brendan & Ben (and potentially others: Chris Kelble) if it fails, or changes status
+1. Add contour plots:
+  - Salinity
+  - Chlorophyll
+1. Figure out any other oddities with input data, eg multiple boat transects on single day for https://marinebon.org/watermon-app/date_2019-12-17.html.
+1. ...
+
+## done
 
 1. reorganize data to go from wide to long:
 
