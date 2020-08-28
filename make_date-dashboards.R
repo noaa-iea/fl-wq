@@ -2,7 +2,7 @@
 if (!require(librarian)) install.packages("librarian"); library(librarian)
 shelf(rmarkdown, purrr, glue, here, fs)
 
-#source("scripts/process_htm.R")
+source("scripts/process_htm.R")
 dir_data  <- here("data/Raw Data")
 date_dirs <- get_date_dirs(dir_data)
 
@@ -18,6 +18,9 @@ make_date <- function(date){
       "index",
       glue("date_{date}")) %>% 
       path_ext_set("html"))
+  
+  
+  message(glue("{date} -> {basename(out_html)}"))
   
   rmarkdown::render(
     input       = "date_template.Rmd",

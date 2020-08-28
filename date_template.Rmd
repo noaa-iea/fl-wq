@@ -10,9 +10,9 @@ editor_options:
   chunk_output_type: console
 params:
   dates:
-    - "2020-01-24"
+    - "2019-09-18"
     - "2020-02-04"
-  date_selected: "2020-02-04"
+  date_selected: "2019-09-18"
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +20,10 @@ params:
 # c("2019-08-23","2019-09-01","2019-09-08","2019-09-18","2019-10-15","2019-11-01","2019-11-10","2019-12-07","2019-12-11","2019-12-17","2020-01-24","2020-02-04")
 # params = list(
 #   date          = c("2020-01-24", "2020-02-04"),
-#   date_selected = "2020-01-24")
+#   date_selected = "2020-02-04")
+# params = list(
+#   date          = c("2019-09-18", "2020-02-04"),
+#   date_selected = "2019-09-18")
 # params = list(
 #   dates         = c("2019-08-23","2019-09-01","2019-09-08","2019-09-18","2019-10-15","2019-11-01","2019-11-10","2019-12-07","2019-12-11","2019-12-17","2020-01-24","2020-02-04"),
 #   date_selected = "2020-02-04")
@@ -52,7 +55,7 @@ processed_csvs <- tibble(
 Column {.tabset data-width=650}
 -----------------------------------------------------------------------
 
-```{r, eval=F}
+```{r oldshiny_selDate, eval=F}
 # OLD SHINY, but keeping b/c
 # TODO: stylize <select></select> below like prettier Shiny version
 shiny::selectInput(
@@ -62,7 +65,7 @@ shiny::selectInput(
 ```
 
 
-```{r}
+```{r selDate}
 tag_option_date2url <- function(date){
   
   # out_html <- knitr::current_input() %>% 
@@ -85,7 +88,7 @@ tag_option_date2url <- function(date){
     glue("./date_{date}.html"))
   #is_selected <- ifelse(out_html == basename(date_url), T, F)
   
-  message(glue("date: {date}; params$date_selected: {params$date_selected}"))
+  #message(glue("date: {date}; params$date_selected: {params$date_selected}"))
   
   #option_args = list(value = date_url)
   is_selected <- NULL
@@ -109,7 +112,7 @@ tag(
     map(params$dates, tag_option_date2url))
 ```
 
-```{r}
+```{r get_transect}
 get_transect <- function(){
 #get_transect <- function(input = list(sel_date = processed_csvs$date[2])){
   # by date selected
@@ -145,7 +148,7 @@ get_transect <- function(){
 
 ### Map
 
-```{r}
+```{r map}
 o <- get_transect()
   
 map <- leaflet() %>% 
@@ -165,7 +168,7 @@ Column {data-width=350}
 
 ### Temperature
 
-```{r}
+```{r temp}
 d <- o$d
 
 # convert from degrees C to F
@@ -187,6 +190,17 @@ if (is.null(o$ln)){
         lon_dd = lon_dd + 0.0001))
 }
 
+#date_selected = "2020-02-04"
+# fld <- "temp_f"
+# lbl <- "Temp (°F)"
+
+#url <- glue("figures/{params$date_selected}_{fld}.png")
+#fig <- glue("{here()}/docs/{url}")
+# url <- glue("docs/figures/{params$date_selected}_{fld}.png")
+# fig <- glue("{here()}/{url}")
+#   
+# png(fig)
+
 section_plot(
   d %>% data.frame(), 
   x    = "lon_dd"   , y    = "depth_ft"  , z    = "temp_f", 
@@ -194,11 +208,18 @@ section_plot(
   bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 # TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R
+
+# dev.off()
+# 
+# a(href=url, target="_blank", img(src=url, alt=basename(fig)))
+
 ```
+
+
 
 ### Oxygen
 
-```{r, eval=T}
+```{r oxygen, eval=T}
 d <- o$d
   
 # read_csv("data.csv") %>% 
@@ -226,8 +247,10 @@ section_plot(
 
 ### Salinity
 
-```{r, eval=T}
-d <- o$d
+```{r salinity, eval=T}
+d <- o$d %>% 
+  filter(!is.na(salinity_psu)) %>% 
+  select(lon_dd, depth_ft, salinity_psu)
   
 # read_csv("data.csv") %>% 
 #   filter(
@@ -235,7 +258,6 @@ d <- o$d
 #     sensor_model == "Aqua TROLL 600 Vented")
 contours = seq(
   min(d$salinity_psu), max(d$salinity_psu), length.out=5)[c(-1,-5)]
-
 
 if (is.null(o$ln)){
   # TODO: fix plot for when no transect line, only single CTD cast
@@ -254,7 +276,7 @@ section_plot(
 
 ### Chlorophyll
 
-```{r, eval=T}
+```{r chl, eval=T}
 d <- o$d
   
 # read_csv("data.csv") %>% 

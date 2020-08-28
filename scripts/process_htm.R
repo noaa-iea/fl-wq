@@ -424,10 +424,11 @@ htm_files <- tibble(
   yml = map_chr(htm, path_ext_set, "yml"))
 
 # process htm files ----
-pwalk(htm_files, process_htm, redo = T)
+pwalk(htm_files, process_htm, redo = F)
 
 # get dates ----
 date_dirs <- get_date_dirs(dir_data)$dir
 
 # process date directories ----
-walk(date_dirs, process_date, redo = T)
+walk(date_dirs, process_date, redo = F)
+#process_date(date_dirs[12], redo = T)

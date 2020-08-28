@@ -14,10 +14,6 @@ Please visit https://marinebon.org/watermon-app for the output website dashboard
   - `use` docker image of Rmarkdown
   - store Ben's Oauth Google Drive token to access files
   - email Brendan & Ben (and potentially others: Chris Kelble) if it fails, or changes status
-1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
-1. Add contour plots:
-  - Salinity
-  - Chlorophyll
 1. Update color ramps: 
   - consider colors used in this publication: https://tos.org/oceanography/article/true-colors-of-oceanography-guidelines-for-effective-and-accurate-colormap
   - Temp: black-purple-gold
@@ -34,6 +30,11 @@ Please visit https://marinebon.org/watermon-app for the output website dashboard
 
 ## done
 
+1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
+1. Add contour plots:
+  - Salinity
+  - Chlorophyll
+  
 1. reorganize data to go from wide to long:
 
     - data.csv: datetime | value | variable | units | sensor_sn | sensor_model
