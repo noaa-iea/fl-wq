@@ -430,4 +430,4 @@ pwalk(htm_files, process_htm, redo = T)
 date_dirs <- get_date_dirs(dir_data)$dir
 
 # process date directories ----
-walk(date_dirs$dir, process_date, redo = T)
+walk(date_dirs, process_date, redo = T)

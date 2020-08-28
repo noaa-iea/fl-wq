@@ -224,3 +224,57 @@ section_plot(
   interpolate  = T, contour = contours, contour_color = "gray")
 ```
 
+### Salinity
+
+```{r, eval=T}
+d <- o$d
+  
+# read_csv("data.csv") %>% 
+#   filter(
+#     variable == "Temperature",
+#     sensor_model == "Aqua TROLL 600 Vented")
+contours = seq(
+  min(d$salinity_psu), max(d$salinity_psu), length.out=5)[c(-1,-5)]
+
+
+if (is.null(o$ln)){
+  # TODO: fix plot for when no transect line, only single CTD cast
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+
+section_plot(
+  d %>% data.frame(), 
+  x    = "lon_dd"   , y    = "depth_ft"  , z    = "salinity_psu", 
+  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Salinity (PSU)",
+  bottom = "bdepth_ft", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+```
+
+### Chlorophyll
+
+```{r, eval=T}
+d <- o$d
+  
+# read_csv("data.csv") %>% 
+#   filter(
+#     variable == "Temperature",
+#     sensor_model == "Aqua TROLL 600 Vented")
+contours = seq(
+  min(d$chl_mgL), max(d$chl_mgL), length.out=5)[c(-1,-5)]
+
+if (is.null(o$ln)){
+  # TODO: fix plot for when no transect line, only single CTD cast
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+
+section_plot(
+  d %>% data.frame(), 
+  x    = "lon_dd"   , y    = "depth_ft"  , z    = "chl_mgL", 
+  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Chlorophyll (mg/L)",
+  bottom = "bdepth_ft", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+```
