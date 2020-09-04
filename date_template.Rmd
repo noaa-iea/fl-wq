@@ -85,7 +85,7 @@ tag_option_date2url <- function(date){
   date_url <- ifelse(
     date == date_index, 
     './index.html', 
-    glue("./date_{date}.html"))
+    glue("./date_{date}.html#oxygen"))
   #is_selected <- ifelse(out_html == basename(date_url), T, F)
   
   #message(glue("date: {date}; params$date_selected: {params$date_selected}"))
@@ -163,8 +163,96 @@ map %>%
   setView(o$ctr[1], o$ctr[2], zoom = 10)
 ```
 
-Column {data-width=350}
+Column {.tabset}
 -----------------------------------------------------------------------
+
+### Chlorophyll
+
+```{r chl, eval=T}
+d <- o$d
+  
+# read_csv("data.csv") %>% 
+#   filter(
+#     variable == "Temperature",
+#     sensor_model == "Aqua TROLL 600 Vented")
+contours = seq(
+  min(d$chl_mgL), max(d$chl_mgL), length.out=5)[c(-1,-5)]
+
+if (is.null(o$ln)){
+  # TODO: fix plot for when no transect line, only single CTD cast
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+
+if (length(unique(d$lon_dd)) > 1){
+  section_plot(
+    d %>% data.frame(), 
+    x    = "lon_dd"   , y    = "depth_ft"  , z    = "chl_mgL", 
+    xlab = "Longitude", ylab = "Depth (ft)", zlab = "Chlorophyll (mg/L)",
+    bottom = "bdepth_ft", sampling_indicator = "points",
+    interpolate  = T, contour = contours, contour_color = "gray")
+}
+```
+
+### Oxygen {.active}
+
+```{r oxygen, eval=T}
+d <- o$d
+  
+# read_csv("data.csv") %>% 
+#   filter(
+#     variable == "Temperature",
+#     sensor_model == "Aqua TROLL 600 Vented")
+contours = seq(
+  min(d$o2_mgL), max(d$o2_mgL), length.out=5)[c(-1,-5)]
+
+
+if (is.null(o$ln)){
+  # TODO: fix plot for when no transect line, only single CTD cast
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+
+section_plot(
+  d %>% data.frame(), 
+  x    = "lon_dd"   , y    = "depth_ft"  , z    = "o2_mgL", 
+  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Oxygen (mg/L)",
+  bottom = "bdepth_ft", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+```
+
+### Salinity
+
+```{r salinity, eval=T}
+d <- o$d %>% 
+  filter(!is.na(salinity_psu)) #%>% 
+  #select(lon_dd, depth_ft, salinity_psu, bdepth_ft)
+  
+# read_csv("data.csv") %>% 
+#   filter(
+#     variable == "Temperature",
+#     sensor_model == "Aqua TROLL 600 Vented")
+contours = seq(
+  min(d$salinity_psu), max(d$salinity_psu), length.out=5)[c(-1,-5)]
+
+if (is.null(o$ln)){
+  d <- bind_rows(
+    d,
+    d %>% 
+      mutate(lon_dd = lon_dd + 0.0001))}
+  # TODO: fix plot for when no transect line, only single CTD cast
+
+if (length(unique(d$lon_dd)) > 1){
+  section_plot(
+  d %>% data.frame(), 
+  x    = "lon_dd"   , y    = "depth_ft"  , z    = "salinity_psu", 
+  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Salinity (PSU)",
+  bottom = "bdepth_ft", sampling_indicator = "points",
+  interpolate  = T, contour = contours, contour_color = "gray")
+}
+```
 
 ### Temperature
 
@@ -213,90 +301,4 @@ section_plot(
 # 
 # a(href=url, target="_blank", img(src=url, alt=basename(fig)))
 
-```
-
-
-
-### Oxygen
-
-```{r oxygen, eval=T}
-d <- o$d
-  
-# read_csv("data.csv") %>% 
-#   filter(
-#     variable == "Temperature",
-#     sensor_model == "Aqua TROLL 600 Vented")
-contours = seq(
-  min(d$o2_mgL), max(d$o2_mgL), length.out=5)[c(-1,-5)]
-
-
-if (is.null(o$ln)){
-  # TODO: fix plot for when no transect line, only single CTD cast
-  d <- bind_rows(
-    d,
-    d %>% 
-      mutate(lon_dd = lon_dd + 0.0001))}
-
-section_plot(
-  d %>% data.frame(), 
-  x    = "lon_dd"   , y    = "depth_ft"  , z    = "o2_mgL", 
-  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Oxygen (mg/L)",
-  bottom = "bdepth_ft", sampling_indicator = "points",
-  interpolate  = T, contour = contours, contour_color = "gray")
-```
-
-### Salinity
-
-```{r salinity, eval=T}
-d <- o$d %>% 
-  filter(!is.na(salinity_psu)) %>% 
-  select(lon_dd, depth_ft, salinity_psu)
-  
-# read_csv("data.csv") %>% 
-#   filter(
-#     variable == "Temperature",
-#     sensor_model == "Aqua TROLL 600 Vented")
-contours = seq(
-  min(d$salinity_psu), max(d$salinity_psu), length.out=5)[c(-1,-5)]
-
-if (is.null(o$ln)){
-  # TODO: fix plot for when no transect line, only single CTD cast
-  d <- bind_rows(
-    d,
-    d %>% 
-      mutate(lon_dd = lon_dd + 0.0001))}
-
-section_plot(
-  d %>% data.frame(), 
-  x    = "lon_dd"   , y    = "depth_ft"  , z    = "salinity_psu", 
-  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Salinity (PSU)",
-  bottom = "bdepth_ft", sampling_indicator = "points",
-  interpolate  = T, contour = contours, contour_color = "gray")
-```
-
-### Chlorophyll
-
-```{r chl, eval=T}
-d <- o$d
-  
-# read_csv("data.csv") %>% 
-#   filter(
-#     variable == "Temperature",
-#     sensor_model == "Aqua TROLL 600 Vented")
-contours = seq(
-  min(d$chl_mgL), max(d$chl_mgL), length.out=5)[c(-1,-5)]
-
-if (is.null(o$ln)){
-  # TODO: fix plot for when no transect line, only single CTD cast
-  d <- bind_rows(
-    d,
-    d %>% 
-      mutate(lon_dd = lon_dd + 0.0001))}
-
-section_plot(
-  d %>% data.frame(), 
-  x    = "lon_dd"   , y    = "depth_ft"  , z    = "chl_mgL", 
-  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Chlorophyll (mg/L)",
-  bottom = "bdepth_ft", sampling_indicator = "points",
-  interpolate  = T, contour = contours, contour_color = "gray")
 ```
