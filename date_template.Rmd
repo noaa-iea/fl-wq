@@ -85,7 +85,7 @@ tag_option_date2url <- function(date){
   date_url <- ifelse(
     date == date_index, 
     './index.html', 
-    glue("./date_{date}.html#oxygen"))
+    glue("./date_{date}.html"))
   #is_selected <- ifelse(out_html == basename(date_url), T, F)
   
   #message(glue("date: {date}; params$date_selected: {params$date_selected}"))
@@ -200,7 +200,7 @@ if (length(unique(d$lon_dd)) > 1){
 }
 ```
 
-### Oxygen {.active}
+### Oxygen
 
 ```{r oxygen, eval=T}
 d <- o$d
