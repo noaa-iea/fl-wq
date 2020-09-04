@@ -10,9 +10,9 @@ editor_options:
   chunk_output_type: console
 params:
   dates:
-    - "2019-09-18"
+    - "2020-01-24"
     - "2020-02-04"
-  date_selected: "2019-09-18"
+  date_selected: "2020-01-24"
 ---
 
 ```{r setup, include=FALSE}
@@ -176,7 +176,8 @@ d <- o$d
 #     variable == "Temperature",
 #     sensor_model == "Aqua TROLL 600 Vented")
 contours = seq(
-  min(d$chl_mgL), max(d$chl_mgL), length.out=5)[c(-1,-5)]
+  min(d$chl_mgL), max(d$chl_mgL), length.out=5)[c(-1,-5)] %>% 
+  round(1)
 
 if (is.null(o$ln)){
   # TODO: fix plot for when no transect line, only single CTD cast
@@ -185,11 +186,15 @@ if (is.null(o$ln)){
     d %>% 
       mutate(lon_dd = lon_dd + 0.0001))}
 
+df <- d %>% data.frame() %>% units::drop_units()
+
 if (length(unique(d$lon_dd)) > 1){
   section_plot(
-    d %>% data.frame(), 
+    df, 
     x    = "lon_dd"   , y    = "depth_ft"  , z    = "chl_mgL", 
     xlab = "Longitude", ylab = "Depth (ft)", zlab = "Chlorophyll (mg/L)",
+    zscale = "gradient2", midpoint = mean(df$chl_mgL), 
+    low = "white", mid = "lightgreen", high = "darkgreen",
     bottom = "bdepth_ft", sampling_indicator = "points",
     interpolate  = T, contour = contours, contour_color = "gray")
 }
@@ -205,7 +210,8 @@ d <- o$d
 #     variable == "Temperature",
 #     sensor_model == "Aqua TROLL 600 Vented")
 contours = seq(
-  min(d$o2_mgL), max(d$o2_mgL), length.out=5)[c(-1,-5)]
+  min(d$o2_mgL), max(d$o2_mgL), length.out=5)[c(-1,-5)] %>% 
+  round(1)
 
 
 if (is.null(o$ln)){
@@ -215,10 +221,15 @@ if (is.null(o$ln)){
     d %>% 
       mutate(lon_dd = lon_dd + 0.0001))}
 
+df <- d %>% data.frame() %>% units::drop_units()
+  
 section_plot(
-  d %>% data.frame(), 
+  df, 
   x    = "lon_dd"   , y    = "depth_ft"  , z    = "o2_mgL", 
   xlab = "Longitude", ylab = "Depth (ft)", zlab = "Oxygen (mg/L)",
+  # zscale = "plasma",
+  zscale = "gradient2", midpoint = mean(df$o2_mgL), 
+  low = "red", mid = "black", high = "gray90",
   bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 ```
@@ -235,7 +246,8 @@ d <- o$d %>%
 #     variable == "Temperature",
 #     sensor_model == "Aqua TROLL 600 Vented")
 contours = seq(
-  min(d$salinity_psu), max(d$salinity_psu), length.out=5)[c(-1,-5)]
+  min(d$salinity_psu), max(d$salinity_psu), length.out=5)[c(-1,-5)] %>% 
+  round(1)
 
 if (is.null(o$ln)){
   d <- bind_rows(
@@ -244,13 +256,18 @@ if (is.null(o$ln)){
       mutate(lon_dd = lon_dd + 0.0001))}
   # TODO: fix plot for when no transect line, only single CTD cast
 
+# df <- d %>% data.frame() %>% units::drop_units()
+# 
+#   zscale = "gradient2", midpoint = mean(df$temp_f), 
+#   low = "blue", mid = "white", high = "red",
+#   
 if (length(unique(d$lon_dd)) > 1){
   section_plot(
-  d %>% data.frame(), 
-  x    = "lon_dd"   , y    = "depth_ft"  , z    = "salinity_psu", 
-  xlab = "Longitude", ylab = "Depth (ft)", zlab = "Salinity (PSU)",
-  bottom = "bdepth_ft", sampling_indicator = "points",
-  interpolate  = T, contour = contours, contour_color = "gray")
+    d %>% data.frame(), 
+    x    = "lon_dd"   , y    = "depth_ft"  , z    = "salinity_psu", 
+    xlab = "Longitude", ylab = "Depth (ft)", zlab = "Salinity (PSU)",
+    bottom = "bdepth_ft", sampling_indicator = "points",
+    interpolate  = T, contour = contours, contour_color = "gray")
 }
 ```
 
@@ -267,7 +284,8 @@ d <- d %>%
 
 # TODO add bottom_depth to points
 contours = seq(
-  min(d$temp_f), max(d$temp_f), length.out=5)[c(-1,-5)]
+  min(d$temp_f), max(d$temp_f), length.out=5)[c(-1,-5)] %>% 
+  round(1)
 
 if (is.null(o$ln)){
   # TODO: fix plot for when no transect line, only single CTD cast
@@ -288,11 +306,14 @@ if (is.null(o$ln)){
 # fig <- glue("{here()}/{url}")
 #   
 # png(fig)
+df <- d %>% data.frame() %>% units::drop_units()
 
 section_plot(
-  d %>% data.frame(), 
+  df, 
   x    = "lon_dd"   , y    = "depth_ft"  , z    = "temp_f", 
   xlab = "Longitude", ylab = "Depth (ft)", zlab = "Temp (°F)",
+  zscale = "gradient2", midpoint = mean(df$temp_f), 
+  low = "blue", mid = "white", high = "red",
   bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
 # TODO: customize https://github.com/MikkoVihtakari/PlotSvalbard/blob/master/R/section_plot.R

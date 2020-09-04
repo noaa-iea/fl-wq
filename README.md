@@ -9,11 +9,6 @@ Please visit https://marinebon.org/watermon-app for the output website dashboard
 - only want downward casts, not return or noise in beginning
 
 ## next steps
-
-1. Turn on Github Actions to regularly (eg daily), render website, which will involve a few more tasks:
-  - `use` docker image of Rmarkdown
-  - store Ben's Oauth Google Drive token to access files
-  - email Brendan & Ben (and potentially others: Chris Kelble) if it fails, or changes status
 1. Update color ramps: 
   - consider colors used in this publication: https://tos.org/oceanography/article/true-colors-of-oceanography-guidelines-for-effective-and-accurate-colormap
   - Temp: black-purple-gold
@@ -23,6 +18,11 @@ Please visit https://marinebon.org/watermon-app for the output website dashboard
     red scale below
   - Salinity: blue-green-yellow
   - Chlorophyll: white to green
+1. Reduce silly decimal precision in contours of plots
+1. Turn on Github Actions to regularly (eg daily), render website, which will involve a few more tasks:
+  - `use` docker image of Rmarkdown
+  - store Ben's Oauth Google Drive token to access files
+  - email Brendan & Ben (and potentially others: Chris Kelble) if it fails, or changes status
 1. Drop the dots in the profile plot. Unnecessary clutter. 
 1. Jitter the locations by 1/4-degree with thick line. Apply to all markers at once so shifted, but shape remains. To maintain confidentiality of fishing locations.
 1. Figure out any other oddities with input data, eg multiple boat transects on single day for https://marinebon.org/watermon-app/date_2019-12-17.html.
