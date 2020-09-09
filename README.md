@@ -8,7 +8,7 @@ Please visit https://marinebon.org/watermon-app for the output website dashboard
 - only want downward casts, not return or noise in beginning
 
 ## next steps
-1. smooth the data per cast by interpolating into 1-foot bins. The data re pretty noisy and this would clean up the profiles.
+1. smooth the data per cast by interpolating into 1-foot bins. The data are pretty noisy and this would clean up the profiles.
 1. Drop the dots in the profile plot. Unnecessary clutter. 
 1. Drop single cast transects from dropdown menu
 1. Jitter the locations by 1/4-degree with thick line. Apply to all markers at once so shifted, but shape remains. To maintain confidentiality of fishing locations.
