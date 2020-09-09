@@ -193,8 +193,8 @@ if (length(unique(d$lon_dd)) > 1){
     df, 
     x    = "lon_dd"   , y    = "depth_ft"  , z    = "chl_mgL", 
     xlab = "Longitude", ylab = "Depth (ft)", zlab = "Chlorophyll (mg/L)",
-    zscale = "gradient2", midpoint = mean(df$chl_mgL), 
-    low = "dodgerblue4", mid = "chartreuse3", high = "palegreen1",
+    zscale = "gradient2", midpoint = median(df$chl_mgL), 
+    low = "dodgerblue4", mid = "chartreuse3", high = "palegreen2",
     bottom = "bdepth_ft", sampling_indicator = "points",
     interpolate  = T, contour = contours, contour_color = "gray")
 }
@@ -228,7 +228,7 @@ section_plot(
   x    = "lon_dd"   , y    = "depth_ft"  , z    = "o2_mgL", 
   xlab = "Longitude", ylab = "Depth (ft)", zlab = "Oxygen (mg/L)",
   # zscale = "plasma",
-  zscale = "gradient2", midpoint = mean(df$o2_mgL), 
+  zscale = "gradient2", midpoint = median(df$o2_mgL), 
   low = "red", mid = "gray20", high = "gray90",
   bottom = "bdepth_ft", sampling_indicator = "points",
   interpolate  = T, contour = contours, contour_color = "gray")
