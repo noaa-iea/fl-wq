@@ -4,11 +4,22 @@ Florida Commercial Watermen's Conservation (FCWC) citizen science water quality 
 Please visit https://marinebon.org/watermon-app for the output website dashboard.
 
 ## process
-
 - drop at least 3 casts (csv ea)
 - only want downward casts, not return or noise in beginning
 
 ## next steps
+1. smooth the data per cast by interpolating into 1-foot bins. The data re pretty noisy and this would clean up the profiles.
+1. Drop the dots in the profile plot. Unnecessary clutter. 
+1. Drop single cast transects from dropdown menu
+1. Jitter the locations by 1/4-degree with thick line. Apply to all markers at once so shifted, but shape remains. To maintain confidentiality of fishing locations.
+1. Figure out any other oddities with input data, eg multiple boat transects on single day for https://marinebon.org/watermon-app/date_2019-12-17.html.
+1. Turn on Github Actions to regularly (eg daily), render website, which will involve a few more tasks:
+  - `use` docker image of Rmarkdown
+  - store Ben's Oauth Google Drive token to access files
+  - email Brendan & Ben (and potentially others: Chris Kelble) if it fails, or changes status
+
+
+## done
 1. Update color ramps: 
   - consider colors used in this publication: https://tos.org/oceanography/article/true-colors-of-oceanography-guidelines-for-effective-and-accurate-colormap
   - Temp: black-purple-gold
@@ -19,17 +30,6 @@ Please visit https://marinebon.org/watermon-app for the output website dashboard
   - Salinity: blue-green-yellow
   - Chlorophyll: white to green
 1. Reduce silly decimal precision in contours of plots
-1. Turn on Github Actions to regularly (eg daily), render website, which will involve a few more tasks:
-  - `use` docker image of Rmarkdown
-  - store Ben's Oauth Google Drive token to access files
-  - email Brendan & Ben (and potentially others: Chris Kelble) if it fails, or changes status
-1. Drop the dots in the profile plot. Unnecessary clutter. 
-1. Jitter the locations by 1/4-degree with thick line. Apply to all markers at once so shifted, but shape remains. To maintain confidentiality of fishing locations.
-1. Figure out any other oddities with input data, eg multiple boat transects on single day for https://marinebon.org/watermon-app/date_2019-12-17.html.
-
-
-## done
-
 1. 3 panes: 1) map, 2) 2 vars. 3) 2 more vars per `9-1-19_Venice.jpg`
 1. Add contour plots:
   - Salinity
