@@ -152,7 +152,8 @@ get_transect <- function(){
 o <- get_transect()
   
 map <- leaflet() %>% 
-  addProviderTiles(providers$Esri.OceanBasemap) %>% 
+  addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Base/MapServer/tile/{z}/{y}/{x}", attribution = "Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, National Geographic, DeLorme, NAVTEQ, and Esri", options = tileOptions(maxZoom = 13)) %>%
+  addTiles(urlTemplate = "https://server.arcgisonline.com/ArcGIS/rest/services/Ocean/World_Ocean_Reference/MapServer/tile/{z}/{y}/{x}", options = tileOptions(maxZoom = 13)) %>% 
   addMarkers(data = o$pts, popup = ~glue("{lon_dd}, {lat_dd}"))
 if (!is.null(o$ln)){
   map <- map %>% 
